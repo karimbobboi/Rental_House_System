@@ -6,12 +6,18 @@
     xmlns:local="clr-namespace:Rental_House_System"
     Shell.FlyoutBehavior="Disabled">
 
-    <TabBar Route="home">
-        <Tab Title="home">
+    <TabBar Route="Home">
+        <Tab Title="Home">
             <ShellContent
                 Title="Home"
                 ContentTemplate="{DataTemplate local:MainPage}"
                 Route="MainPage" />
+        </Tab>
+        <Tab Title="Account">
+            <ShellContent
+                Title="Account"
+                ContentTemplate="{DataTemplate local:AccountPage}"
+                Route="AccountPage" />
         </Tab>
     </TabBar>
 

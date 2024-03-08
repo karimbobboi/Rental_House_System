@@ -51,4 +51,13 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Resources\Images\bootstrap_person_circle.svg" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\bootstrap_person_circle.svg" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="SQLite" Version="3.13.0" />
+	</ItemGroup>
 </Project>

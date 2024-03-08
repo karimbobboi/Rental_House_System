@@ -5,6 +5,7 @@ using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Graphics.Text;
 using static Java.Util.Jar.Attributes;
 using static System.Net.Mime.MediaTypeNames;
+using System.Reflection;
 
 namespace Rental_House_System;
 
@@ -42,10 +43,10 @@ public partial class RentPage : ContentPage
     public string currentImg;
     public string totalImgs;
     public string fullText;
-    public Room toRent;
+    public Listing toRent;
     private MainViewModel images;
 
-    public RentPage(Room temp)
+    public RentPage(Listing temp)
 	{
 		InitializeComponent();
         toRent = temp;

@@ -11,8 +11,9 @@ public partial class MainPage : ContentPage
 
 	async private void OnCounterClicked(object sender, EventArgs e)
 	{
-        Room r = new Room()
+        Listing r = new Listing()
         {
+            lId = 1,
             price = "1,790",
             address = "Verney Park Campus, London Road, Buckingham, MK18 1AD",
             type = "Apartment",
