@@ -3,7 +3,8 @@
 public partial class App : Application
 {
     public User activeUser;
-	public App()
+    public AppDatabase appDB = new AppDatabase();
+    public App()
 	{
 		InitializeComponent();
 
@@ -34,11 +35,11 @@ public class Listing
     public bool park { get; set; } = false;
 }
 
-public class User
-{
-    public int uid { get; private set; } = -1;
-    public string fname { get; set; } = "";
-    public string lname { get; set; } = "";
-    public string email { get; set; } = "";
-    public string password { get; set; } = "";
-}
+//public class User
+//{
+//    public int uid { get; private set; } = -1;
+//    public string fname { get; set; } = "";
+//    public string lname { get; set; } = "";
+//    public string email { get; set; } = "";
+//    public string password { get; set; } = "";
+//}

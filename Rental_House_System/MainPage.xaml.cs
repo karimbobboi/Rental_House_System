@@ -32,6 +32,7 @@ public partial class MainPage : ContentPage
             park = true
         };
         await Navigation.PushAsync(new RentPage(r));
+        
         //await Shell.Current.GoToAsync("room");
     }
 }
