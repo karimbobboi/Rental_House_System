@@ -71,6 +71,11 @@ namespace Rental_House_System
                         select u).FirstOrDefault();
             return user;
         }
+
+        //public static string AddressToString(Address a)
+        //{
+        //    return a.streetName + ", " + a.city + ", " + a.postcode; 
+        //}
     }
 }
 
