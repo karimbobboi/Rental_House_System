@@ -22,6 +22,10 @@ public class MainViewModel : BindableObject
                 "living_room.jpeg"
             };
     }
+
+    void Button_Clicked(System.Object sender, System.EventArgs e)
+    {
+    }
 }
 
 public class IntToStringConverter : IValueConverter
@@ -39,7 +43,6 @@ public class IntToStringConverter : IValueConverter
 
 public partial class RentPage : ContentPage
 {
-    
     public string currentImg;
     public string totalImgs;
     public string fullText;
@@ -48,7 +51,7 @@ public partial class RentPage : ContentPage
 
     public RentPage(Listing temp)
 	{
-		InitializeComponent();
+        InitializeComponent();
         toRent = temp;
         images = new MainViewModel();
         imgSlider.BindingContext = images;
@@ -174,5 +177,20 @@ public partial class RentPage : ContentPage
         }
 
         return true;
+    }
+
+    public async void EmailBtn_Clicked(System.Object sender, System.EventArgs e)
+    {
+        await Navigation.PushAsync(new EmailAgent(toRent));
+    }
+
+    public async void CallBtn_Clicked(System.Object sender, System.EventArgs e)
+    {
+        bool answer = await DisplayAlert($"Call +{44123456789}", "Do you want to call the agent?", "Call", "Cancel");
+
+        if (answer)
+        {
+            
+        }
     }
 }

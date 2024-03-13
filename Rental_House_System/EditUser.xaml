@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rental_House_System.EditUser"
+             Title="Edit Profile">
+    <ScrollView>
+        <Grid x:Name="fields" Margin="20,0,20,20" RowSpacing="13" ColumnSpacing="10"
+              VerticalOptions="Center" ColumnDefinitions="*">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="firstNameGrid" Grid.Row="0" Grid.Column="0" RowSpacing="0"
+                  RowDefinitions="*,2*" ColumnDefinitions="*,70">
+                <Label Grid.Row="0" Text="First Name" FontSize="16" FontAttributes="Bold"/>
+                <Entry Grid.Row="1" x:Name="firstName" Text="{Binding fname}" TextColor="Black"
+                        FontSize="12" Margin="0,0,0,10" IsEnabled="False" BackgroundColor="Transparent"/>
+                <Button Margin="10,0,0,0" FontSize="11" Text="Edit" Clicked="EditBtn_Clicked"
+                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent"
+                  RowDefinitions="*,2*" ColumnDefinitions="*,70">
+                <Label Grid.Row="0" Text="Last Name" FontSize="16" FontAttributes="Bold"/>
+                <Entry Grid.Row="1" x:Name="lastName" Text="{Binding lname}" BackgroundColor="Transparent"
+                       FontSize="12" Margin="0,0,0,10" TextColor="Black" IsEnabled="False"/>
+                <Button Margin="10,0,0,0" FontSize="11" Text="Edit" Clicked="EditBtn_Clicked"
+                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"/>
+            </Grid>
+            <Grid Grid.Row="2" Grid.ColumnSpan="2"
+                  RowDefinitions="*,2*" ColumnDefinitions="*,70">
+                <Label Grid.Row="0" Text="Email" FontSize="16" FontAttributes="Bold"/>
+                <Entry Grid.Row="1" x:Name="electronicMail" Text="{Binding email}"
+                        FontSize="12" Margin="0,0,0,10" Keyboard="Email"
+                        TextColor="Black" IsEnabled="False" BackgroundColor="Transparent"/>
+                <Button Margin="10,0,0,0" FontSize="11" Text="Edit" Clicked="EditBtn_Clicked"
+                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"/>
+            </Grid>
+            <Grid Grid.Row="3" Grid.ColumnSpan="2"
+                  RowDefinitions="*,2*" ColumnDefinitions="*,70">
+                <Label Grid.Row="0" Text="Password" FontSize="16" FontAttributes="Bold"/>
+                <Entry x:Name="pass" Grid.Row="1" Text="{Binding password}" TextColor="Black"
+                        FontSize="12" Margin="0,0,0,10" BackgroundColor="Transparent"
+                        IsPassword="True" IsEnabled="False"/>
+                <Button Margin="10,0,0,0" FontSize="11" Text="Edit" Clicked="EditBtn_Clicked"
+                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"/>
+            </Grid>
+            <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Save changes" VerticalOptions="Center"
+                    BackgroundColor="{StaticResource Secondary}" Margin="0,20,0,0" Clicked="SaveBtn_Clicked"/>
+            <Button Grid.Row="5" Grid.ColumnSpan="2" Text="Cancel" VerticalOptions="Center"
+                    BackgroundColor="{StaticResource Primary}" Margin="0,0,0,20" Clicked="CancelBtn_Clicked"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

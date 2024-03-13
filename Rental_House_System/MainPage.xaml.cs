@@ -11,33 +11,45 @@ public partial class MainPage : ContentPage
 
 	async private void OnCounterClicked(object sender, EventArgs e)
 	{
-        //Address a = new Address()
-        //{
-        //    streetName = "Verney Park Campus, London Road",
-        //    postcode = "MK18 1AD",
-        //    city = "Buckignham"
-        //};
-        //Listing r = new Listing()
-        //{
-        //    lId = 1,
-        //    price = 1790,
-        //    address = a,
-        //    type = "Apartment",
-        //    available = "12/2/2001",
-        //    numRooms = 2,
-        //    numToilets = 1,
-        //    bills = true,
-        //    internet = true,
-        //    furnished = true,
-        //    tv = true,
-        //    gym = true,
-        //    lterm = true,
-        //    kitchen = true,
-        //    dishwasher = true,
-        //    wmachine = true,
-        //    park = true
-        //};
-        //await Navigation.PushAsync(new RentPage(r));
+        string[] imgs = { "house_example.jpeg", "living_room.jpeg", "bathroom.jpeg" };
+        Address a = new Address()
+        {
+            streetName = "Verney Park Campus, London Road",
+            postcode = "MK18 1AD",
+            city = "Buckignham"
+        };
+
+        Agent ag = new Agent()
+        {
+            name = "Buckingham Property Management",
+            phone = "MK18 1AD",
+            email = "Buckignham"
+        };
+
+        Listing r = new Listing()
+        {
+            lId = 1,
+            price = 1790,
+            agent = ag,
+            images = imgs,
+            address = a,
+            type = "Apartment",
+            available = "12/2/2001",
+            numRooms = 2,
+            numToilets = 1,
+            bills = true,
+            internet = true,
+            furnished = true,
+            tv = true,
+            gym = true,
+            lterm = true,
+            kitchen = true,
+            dishwasher = true,
+            wmachine = true,
+            park = true
+        };
+        await Navigation.PushAsync(new RentPage(r));
+        //await Navigation.PushAsync(new EmailAgent(r));
 
         //await Shell.Current.GoToAsync("room");
     }

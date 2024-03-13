@@ -4,35 +4,29 @@
              x:Class="Rental_House_System.AccountPage"
              Title="Profile">
     <ScrollView>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" BackgroundColor="AliceBlue">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+        <Grid x:Name="profile" RowDefinitions="100, *, *, 60">
+            <Grid Grid.Row="0" BackgroundColor="AliceBlue"
+                  ColumnDefinitions="80, *, *" RowDefinitions="*, *">
+
                 <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="10,0,0,0"
-                       Source="bootstrap_person_circle.svg" HeightRequest="60"/>
+                       Source="bootstrap_person_circle.svg" HeightRequest="40"/>
                 <VerticalStackLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
                                      Margin="10,0,0,0" VerticalOptions="Center">
-                    <Label Text="Abdulkarim" FontSize="18"
+                    <Label Text="{Binding fname}" FontSize="18"
                        VerticalTextAlignment="Center"/>
                     <Label Text="Edit profile" FontSize="16"
                        TextColor="Grey" VerticalTextAlignment="Center"/>
                 </VerticalStackLayout>
                 <Label Grid.Column="2" Grid.RowSpan="2" Text=">" FontAttributes="Bold" FontSize="20"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="End" Margin="0,0,10,0"/>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnGridTapped"
+                              NumberOfTapsRequired="1" />
+                </Grid.GestureRecognizers>
             </Grid>
+            <Button Grid.Row="3" VerticalOptions="Center" Margin="20,0,20,0" Clicked="LogOutBtn_Clicked"
+                    BackgroundColor="{StaticResource Secondary}" Text="Log out"/>
         </Grid>
     </ScrollView>
 </ContentPage>

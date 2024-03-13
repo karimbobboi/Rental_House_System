@@ -8,7 +8,7 @@ namespace Rental_House_System
     {
         [PrimaryKey, AutoIncrement]
         public int lId { get; set; }
-        //public Agent agent { get; set; }
+        public Agent agent { get; set; }
         public int price { get; set; }
         public Address address { get; set; }
         public string type { get; set; }
@@ -50,14 +50,14 @@ namespace Rental_House_System
         }
     }
 
-    //[Table("Agent")]
-    //public class Agent
-    //{
-    //    [PrimaryKey, AutoIncrement]
-    //    public int agentId { get; set; }
-    //    public string name { get; set; }
-    //    public string email { get; set; }
-    //    public string phone { get; set; }
-    //}
+    [Table("Agent")]
+    public class Agent
+    {
+        [PrimaryKey, AutoIncrement]
+        public int agentId { get; set; }
+        public string name { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
+    }
 }
 

@@ -2,8 +2,23 @@
 
 public partial class AccountPage : ContentPage
 {
+    App globalref = (App)Application.Current;
 	public AccountPage()
 	{
 		InitializeComponent();
+        profile.BindingContext = globalref.activeUser;
 	}
+
+    async void OnGridTapped(object sender, EventArgs args)
+    {
+        await Navigation.PushAsync(new EditUser());
+    }
+
+    async void LogOutBtn_Clicked(System.Object sender, System.EventArgs e)
+    {
+        bool answer = await DisplayAlert("Are you sure you want to log out?",
+            "Please tap yes if you want to sign out of this account.","Yes", "No");
+        if(answer)
+            globalref.MainPage = new LoginPage();
+    }
 }

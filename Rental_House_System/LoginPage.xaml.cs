@@ -14,7 +14,9 @@ public partial class LoginPage : ContentPage
             User u = globalref.appDB.GetUserByEmail(electronicMail.Text);
             if (u != null) {
                 if (u.password == pass.Text) {
+                    globalref.activeUser = u;
                     await DisplayAlert("Login successful", $"Welcome back, {u.fname}", "Continue");
+                    globalref.MainPage = new AppShell();
                 }
                 else
                 {
