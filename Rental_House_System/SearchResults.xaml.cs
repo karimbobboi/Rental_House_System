@@ -5,45 +5,43 @@ namespace Rental_House_System;
 public partial class SearchResults : ContentPage
 {
 	public ObservableCollection<Listing> allListings = new ObservableCollection<Listing>();
-    public SearchResults()
+    App globalref = (App)Application.Current;
+    public SearchResults(ObservableCollection<Listing> temp)
 	{
 		InitializeComponent();
-        System.Diagnostics.Debug.WriteLine("sasas");
-        string[] imgs = { "house_example.jpeg", "living_room.jpeg", "bathroom.jpeg" };
-
-        Address a = new Address()
-        {
-            streetName = "Verney Park Campus, London Road",
-            postcode = "MK18 1AD",
-            city = "Buckignham"
-        };
-        Listing r = new Listing()
-        {
-            lId = 1,
-            price = 1790,
-            address = a,
-            type = "Apartment",
-            available = "12/2/2001",
-            images = imgs,
-            numRooms = 2,
-            numToilets = 1,
-            bills = true,
-            internet = true,
-            tv = true,
-            gym = true,
-            lterm = true,
-            kitchen = true,
-            dishwasher = true,
-            wmachine = true,
-            park = true
-        };
-        System.Diagnostics.Debug.WriteLine("sasas1");
-        allListings.Add(r);
-        allListings.Add(r);
-        allListings.Add(r);
-        allListings.Add(r);
-        System.Diagnostics.Debug.WriteLine("sasas");
+        //allListings = globalref.appDB.GetAllListings();
+        allListings = temp;
         results.ItemsSource = allListings;
-        System.Diagnostics.Debug.WriteLine("sasas3");
+        if(allListings.Count > 0)
+        {
+            noResult.IsVisible = false;
+        }
+    }
+
+    async void OnInnerStackTapped(System.Object sender, System.EventArgs e)
+    {
+        StackLayout stackLayout = (StackLayout)sender;
+        CarouselView carousel = (CarouselView)stackLayout.Parent;
+
+        // Get the corresponding item of the CarouselView
+        Listing item = (Listing)carousel.BindingContext;
+
+        // Get the index of the item in the ItemsSource collection
+        int index = allListings.IndexOf(item);
+        Listing listing = allListings[index];
+        await Navigation.PushAsync(new RentPage(listing));
+    }
+
+    async void OnStackTapped(System.Object sender, System.EventArgs e)
+    {
+        StackLayout stackLayout = (StackLayout)sender;
+
+        // Get the corresponding item of the ListView
+        Listing item = (Listing)stackLayout.BindingContext;
+
+        // Get the index of the item in the ItemsSource collection
+        int index = allListings.IndexOf(item);
+        Listing listing = allListings[index];
+        await Navigation.PushAsync(new RentPage(listing));
     }
 }

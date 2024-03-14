@@ -1,25 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Rental_House_System"
              x:Class="Rental_House_System.SearchResults"
              Title="Results">
+    <ContentPage.Resources>
+        <local:StringToArrayConverter x:Key="StringToArrayConverter" />
+    </ContentPage.Resources>
     <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="No listing matching filters provided" x:Name="noResult" Margin="20,40"
+                   FontSize="18" VerticalOptions="Center" VerticalTextAlignment="Center"
+                   HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
         <ListView x:Name="results"
                   HasUnevenRows="True"
                   SeparatorVisibility="None"
-                  SelectionMode="None">
+                  SelectionMode="None"
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Frame CornerRadius="10" Padding="0,0,0,10" Margin="10,10" BackgroundColor="White">
                             <StackLayout Padding="0">
                                 <Grid RowDefinitions="*,Auto">
-                                    <CarouselView ItemsSource="{Binding images}"
+                                    <CarouselView EmptyView="No image" ItemsSource="{Binding images, Converter={StaticResource StringToArrayConverter}}"
                                               IndicatorView="indicatorView">
                                         <CarouselView.ItemTemplate>
                                             <DataTemplate>
                                                 <StackLayout Padding="0">
                                                     <Image Source="{Binding .}" Aspect="AspectFill" />
+                                                    <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnInnerStackTapped"
+                                        NumberOfTapsRequired="1" />
+                                                    </StackLayout.GestureRecognizers>
                                                 </StackLayout>
                                             </DataTemplate>
                                         </CarouselView.ItemTemplate>
@@ -34,11 +47,17 @@
                                 <Label Text="{Binding type}" Margin="10,5,10,0"/>
                                 <Label Text="{Binding price, StringFormat='£{0:N0} pcm'}"
                                    Margin="10,0,10,0"/>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnStackTapped"
+                                        NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
                             </StackLayout>
                         </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+            </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

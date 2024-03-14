@@ -4,6 +4,7 @@ using System.Data.Common;
 using SQLite;
 using System.Collections.ObjectModel;
 using System.Reflection;
+using static Android.Provider.CalendarContract;
 
 namespace Rental_House_System
 {
@@ -20,6 +21,8 @@ namespace Rental_House_System
                 DatabaseConnection = new SQLiteConnection(DBConnection.DatabasePath, DBConnection.Flags);
                 // Create a Table
                 DatabaseConnection.CreateTable<User>();
+                DatabaseConnection.CreateTable<Agent>();
+                DatabaseConnection.CreateTable<Listing>();
                 // set the status of the DB
                 CurrentState = "Database and Table Created";
             }
@@ -75,6 +78,49 @@ namespace Rental_House_System
             return user;
         }
 
+        //Agent functions
+        public int AddAgent(Agent agent)
+        {
+            // Insert into the table and return the status of the inset
+            var insertstatus = DatabaseConnection.Insert(agent);
+            System.Diagnostics.Debug.WriteLine(insertstatus);
+            return insertstatus;
+        }
+        // Delete a user
+        public int DeleteAgent(Agent agent)
+        {
+            // Query to return all users in the DB
+            var deletestatus = DatabaseConnection.Delete(agent);
+            return deletestatus;
+        }
+        // Update a user
+        public int UpdateAgent(Agent agent)
+        {
+            // Query to return all users in the DB
+            var updatestatus = DatabaseConnection.Update(agent);
+            return updatestatus;
+        }
+
+        // Return ALL users
+        public ObservableCollection<Agent> GetAllAgents()
+        {
+            ObservableCollection<Agent> agents;
+            // Query to return all users in the DB
+            var allAgents = DatabaseConnection.Table<Agent>();
+            agents = new ObservableCollection<Agent>(allAgents.ToList());
+            return agents;
+        }
+
+        // Return a user based on email
+        public Agent GetAgentByEmail(string email)
+        {
+            // Query to return all agents in the DB
+            var agent = (from u in DatabaseConnection.Table<Agent>()
+                        where u.email == email
+                        select u).FirstOrDefault();
+            return agent;
+        }
+
         // Listings functions
         public int AddListing(Listing listing)
         {
@@ -98,13 +144,13 @@ namespace Rental_House_System
         }
 
         // Return ALL users
-        public ObservableCollection<User> GetAllListings()
+        public ObservableCollection<Listing> GetAllListings()
         {
-            ObservableCollection<User> users;
+            ObservableCollection<Listing> listings;
             // Query to return all users in the DB
-            var allUsers = DatabaseConnection.Table<User>();
-            users = new ObservableCollection<User>(allUsers.ToList());
-            return users;
+            var allListings = DatabaseConnection.Table<Listing>();
+            listings = new ObservableCollection<Listing>(allListings.ToList());
+            return listings;
         }
         // Return a user based on email
         public Listing SearchListings(Listing listing)
@@ -115,6 +161,17 @@ namespace Rental_House_System
             //            where u.email == email
             //            select u).FirstOrDefault();
             return null;
+        }
+
+        public string ArrayToImageString(string[] imgs)
+        {
+            string joinedString = string.Join(",", imgs);
+            return joinedString;
+        }
+
+        public string[] ImageStringToArray(Listing listing) {
+            string[] stringArray = listing.images.Split(',');
+            return stringArray;
         }
     }
 }

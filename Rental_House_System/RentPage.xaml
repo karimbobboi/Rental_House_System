@@ -5,6 +5,7 @@
              x:Class="Rental_House_System.RentPage">
     <ContentPage.Resources>
         <local:IntToStringConverter x:Key="intToString" />
+        <local:StringToArrayConverter x:Key="StringToArrayConverter" />
     </ContentPage.Resources>
 
     <ScrollView>

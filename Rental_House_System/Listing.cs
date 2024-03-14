@@ -8,12 +8,12 @@ namespace Rental_House_System
     {
         [PrimaryKey, AutoIncrement]
         public int lId { get; set; }
-        public Agent agent { get; set; }
+        public string agentEmail { get; set; }
         public int price { get; set; }
-        public Address address { get; set; }
+        public string address { get; set; }
         public string type { get; set; }
         public string available { get; set; }
-        public string[] images { get; set; }
+        public string images { get; set; }
         public string furnished { get; set; } = "Unfurnished";
 
         public int numRooms { get; set; }
@@ -37,10 +37,8 @@ namespace Rental_House_System
         }
     }
 
-    [Table("Address")]
     public class Address
     {
-        [PrimaryKey, AutoIncrement]
         public string postcode { get; set; }
         public string city { get; set; }
         public string streetName { get; set; }

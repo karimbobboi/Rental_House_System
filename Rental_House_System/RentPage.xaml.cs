@@ -11,16 +11,21 @@ namespace Rental_House_System;
 
 public class MainViewModel : BindableObject
 {
-    public IList<string> ImageList { get; set; }
+    App globalref = (App)Microsoft.Maui.Controls.Application.Current;
+    public string[] ImageList { get; set; }
+    public Listing toRent;
 
-    public MainViewModel()
+    public MainViewModel(Listing temp)
     {
-        ImageList = new List<string>
-            {
-                "house_example.jpeg",
-                "bathroom.jpeg",
-                "living_room.jpeg"
-            };
+        //ImageList = new List<string>
+        //    {
+        //        "house_example.jpeg",
+        //        "bathroom.jpeg",
+        //        "living_room.jpeg"
+        //    };
+        toRent = temp;
+        ImageList = globalref.appDB.ImageStringToArray(toRent);
+
     }
 
     void Button_Clicked(System.Object sender, System.EventArgs e)
@@ -47,18 +52,22 @@ public partial class RentPage : ContentPage
     public string totalImgs;
     public string fullText;
     public Listing toRent;
+
+    App globalref = (App)Microsoft.Maui.Controls.Application.Current;
     private MainViewModel images;
 
     public RentPage(Listing temp)
 	{
         InitializeComponent();
         toRent = temp;
-        images = new MainViewModel();
+        //ImageList = globalref.appDB.ImageStringToArray(toRent);
+        
+        images = new MainViewModel(temp);
         imgSlider.BindingContext = images;
         rrr.BindingContext = toRent;
 
         currentImg = "1";
-        totalImgs = images.ImageList.Count.ToString();
+        totalImgs = images.ImageList.Length.ToString();
         fullText = currentImg + "/" + totalImgs;
 
         initLabels();

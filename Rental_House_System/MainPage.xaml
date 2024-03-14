@@ -26,7 +26,7 @@
             <Button BackgroundColor="{StaticResource Tertiary}"
                 x:Name="btnContinue"
                 Text="Continue"
-                Clicked="btnContinue_Clicked"
+                Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>

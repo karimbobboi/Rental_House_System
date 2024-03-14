@@ -53,9 +53,17 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\bootstrap_person_circle.svg" />
+	  <None Remove="Resources\Images\house2_toilet.jpeg" />
+	  <None Remove="Resources\Images\house2_bed.jpeg" />
+	  <None Remove="Resources\Images\house2_out.jpeg" />
+	  <None Remove="Resources\Images\house2.jpeg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\bootstrap_person_circle.svg" />
+	  <BundleResource Include="Resources\Images\house2_toilet.jpeg" />
+	  <BundleResource Include="Resources\Images\house2_bed.jpeg" />
+	  <BundleResource Include="Resources\Images\house2_out.jpeg" />
+	  <BundleResource Include="Resources\Images\house2.jpeg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="SQLite" Version="3.13.0" />

@@ -8,33 +8,44 @@
               ColumnDefinitions="*,*">
 
             <Label Text="Kitchen" Grid.Row="0" Grid.Column="0" FontAttributes="Bold"/>
-            <Switch Grid.Row="0" Grid.Column="1" VerticalOptions="Start"/>
+            <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding kitchen}"
+                    VerticalOptions="Start"/>
 
             <Label Text="Dishwasher" Grid.Row="1" Grid.Column="0" FontAttributes="Bold"/>
-            <Switch Grid.Row="1" Grid.Column="1" VerticalOptions="Start"/>
+            <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding dishwasher}"
+                    VerticalOptions="Start"/>
 
             <Label Text="Washing machine" Grid.Row="2" Grid.Column="0" FontAttributes="Bold"/>
-            <Switch Grid.Row="2" Grid.Column="1" VerticalOptions="Start"/>
+            <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding wMachine}"
+                    VerticalOptions="Start"/>
 
             <Label Text="Fridge" Grid.Row="3" Grid.Column="0" FontAttributes="Bold"/>
-            <Switch Grid.Row="3" Grid.Column="1" VerticalOptions="Start"/>
+            <Switch Grid.Row="3" Grid.Column="1" IsToggled="{Binding fridge}"
+                    VerticalOptions="Start"/>
 
             <Label Text="Parking" Grid.Row="4" Grid.Column="0" FontAttributes="Bold"/>
-            <Switch Grid.Row="4" Grid.Column="1" VerticalOptions="Start"/>
+            <Switch Grid.Row="4" Grid.Column="1" IsToggled="{Binding parking}"
+                     VerticalOptions="Start"/>
 
             <Label Text="Internet" Grid.Row="5" Grid.Column="0" FontAttributes="Bold"/>
-            <Switch Grid.Row="5" Grid.Column="1" VerticalOptions="Start"/>
+            <Switch Grid.Row="5" Grid.Column="1" IsToggled="{Binding internet}"
+                    VerticalOptions="Start"/>
 
             <Label Text="TV" Grid.Row="6" Grid.Column="0" FontAttributes="Bold"/>
-            <Switch Grid.Row="6" Grid.Column="1" VerticalOptions="Start"/>
+            <Switch Grid.Row="6" Grid.Column="1" IsToggled="{Binding tv}"
+                    VerticalOptions="Start"/>
 
             <Label Text="Bills included" Grid.Row="7" Grid.Column="0" FontAttributes="Bold"/>
-            <Switch Grid.Row="7" Grid.Column="1" VerticalOptions="Start"/>
+            <Switch Grid.Row="7" Grid.Column="1" IsToggled="{Binding bills}"
+                    VerticalOptions="Start"/>
 
             <Label Text="Gym" Grid.Row="8" Grid.Column="0" FontAttributes="Bold"/>
-            <Switch Grid.Row="8" Grid.Column="1" VerticalOptions="Start"/>
+            <Switch Grid.Row="8" Grid.Column="1" IsToggled="{Binding gym}"
+                    VerticalOptions="Start"/>
+
             <Label Text="Short term" Grid.Row="9" Grid.Column="0" FontAttributes="Bold"/>
-            <Switch Grid.Row="9" Grid.Column="1" VerticalOptions="Start"/>
+            <Switch Grid.Row="9" Grid.Column="1" IsToggled="{Binding shortTerm}"
+                    VerticalOptions="Start"/>
 
             <!--public bool bills { get; set; } = false;
         public bool internet { get; set; } = false;
