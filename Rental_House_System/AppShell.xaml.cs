@@ -5,7 +5,7 @@ public partial class AppShell : Shell
 	public AppShell()
 	{
 		InitializeComponent();
-        Routing.RegisterRoute("room", typeof(RentPage));
-    }
+		Routing.RegisterRoute("room", typeof(RentPage));
+	}
 }
 

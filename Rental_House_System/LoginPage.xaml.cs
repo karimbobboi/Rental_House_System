@@ -2,14 +2,15 @@
 
 public partial class LoginPage : ContentPage
 {
-	public LoginPage()
+    App globalref = (App)Application.Current;
+    public LoginPage()
 	{
 		InitializeComponent();
 	}
 
     async void SignInBtn_Clicked(System.Object sender, System.EventArgs e)
     {
-        App globalref = (App)Application.Current;
+        
         if (!(electronicMail.Text == "" || pass.Text == "")) {
             User u = globalref.appDB.GetUserByEmail(electronicMail.Text);
             if (u != null) {
@@ -24,7 +25,7 @@ public partial class LoginPage : ContentPage
                 }
             }
             else {
-                await DisplayAlert("An error occurred", "Please retry", "OK");
+                await DisplayAlert("Email address not registered", "Please sign up", "OK");
             }
         }
         else
@@ -35,6 +36,7 @@ public partial class LoginPage : ContentPage
 
     async void SignUpBtn_Clicked(System.Object sender, System.EventArgs e)
     {
-		await Navigation.PushAsync(new CreateAccount());
+        //await Navigation.PushAsync(new CreateAccount());
+        globalref.MainPage = new CreateAccount();
     }
 }

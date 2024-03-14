@@ -8,6 +8,12 @@ public partial class App : Application
 	{
 		InitializeComponent();
 		activeUser = new User();
-		MainPage = new LoginPage();
-	}
+        MainPage = new LoginPage();
+        //MainPage = new SearchPage();
+    }
+
+    public void LogOut()
+    {
+        MainPage = new LoginPage();
+    }
 }

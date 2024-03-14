@@ -39,7 +39,6 @@ public partial class MainPage : ContentPage
             numToilets = 1,
             bills = true,
             internet = true,
-            furnished = true,
             tv = true,
             gym = true,
             lterm = true,
@@ -52,6 +51,11 @@ public partial class MainPage : ContentPage
         //await Navigation.PushAsync(new EmailAgent(r));
 
         //await Shell.Current.GoToAsync("room");
+    }
+
+    void btnContinue_Clicked(System.Object sender, System.EventArgs e)
+    {
+        Navigation.PushAsync(new SearchPage());
     }
 }
 

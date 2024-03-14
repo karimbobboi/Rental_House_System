@@ -115,7 +115,7 @@ public class EditUserVM : INotifyPropertyChanged
 
     public void DeleteUser()
     {
-        //globalref.appDB.DeleteUser(u);
+        globalref.appDB.DeleteUser(globalref.activeUser);
     }
 }
 
@@ -191,5 +191,17 @@ public partial class EditUser : ContentPage
 
         fieldEntry.BackgroundColor = Colors.LightGray;
         fieldEntry.IsEnabled = true;
+    }
+
+    async void DeleteBtn_Clicked(System.Object sender, System.EventArgs e)
+    {
+        bool answer = await DisplayAlert("Are you sure you want to delete this account?",
+            "Please tap yes if you want to permanently delete this account.", "Yes", "No");
+        if (answer) {
+            editUserVM.DeleteUser();
+            await DisplayAlert("Account deleted", "Sorry to see you go!", "Continue");
+            globalref.LogOut();
+        }
+
     }
 }

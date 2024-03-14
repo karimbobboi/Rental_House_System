@@ -3,6 +3,7 @@ using Android.Database.Sqlite;
 using System.Data.Common;
 using SQLite;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 namespace Rental_House_System
 {
@@ -29,6 +30,8 @@ namespace Rental_House_System
         }
 
         // DB Utility Functions
+
+        //User functions
         // Insert a new user
         public int AddUser(User user)
         {
@@ -72,10 +75,47 @@ namespace Rental_House_System
             return user;
         }
 
-        //public static string AddressToString(Address a)
-        //{
-        //    return a.streetName + ", " + a.city + ", " + a.postcode; 
-        //}
+        // Listings functions
+        public int AddListing(Listing listing)
+        {
+            // Insert into the table and return the status of the inset
+            var insertstatus = DatabaseConnection.Insert(listing);
+            return insertstatus;
+        }
+        // Delete a user
+        public int DeleteListing(Listing listing)
+        {
+            // Query to return all users in the DB
+            var deletestatus = DatabaseConnection.Delete(listing);
+            return deletestatus;
+        }
+        // Update a user
+        public int UpdateListing(Listing listing)
+        {
+            // Query to return all users in the DB
+            var updatestatus = DatabaseConnection.Update(listing);
+            return updatestatus;
+        }
+
+        // Return ALL users
+        public ObservableCollection<User> GetAllListings()
+        {
+            ObservableCollection<User> users;
+            // Query to return all users in the DB
+            var allUsers = DatabaseConnection.Table<User>();
+            users = new ObservableCollection<User>(allUsers.ToList());
+            return users;
+        }
+        // Return a user based on email
+        public Listing SearchListings(Listing listing)
+        {
+
+            // Query to return all users in the DB
+            //var user = (from u in DatabaseConnection.Table<User>()
+            //            where u.email == email
+            //            select u).FirstOrDefault();
+            return null;
+        }
     }
 }
 

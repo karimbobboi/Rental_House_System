@@ -4,13 +4,14 @@
              x:Class="Rental_House_System.EditUser"
              Title="Edit Profile">
     <ScrollView>
-        <Grid x:Name="fields" Margin="20,0,20,20" RowSpacing="13" ColumnSpacing="10"
+        <Grid x:Name="fields" Margin="20,0,20,0" RowSpacing="13" ColumnSpacing="10"
               VerticalOptions="Center" ColumnDefinitions="*">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="70"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
@@ -21,7 +22,8 @@
                 <Entry Grid.Row="1" x:Name="firstName" Text="{Binding fname}" TextColor="Black"
                         FontSize="12" Margin="0,0,0,10" IsEnabled="False" BackgroundColor="Transparent"/>
                 <Button Margin="10,0,0,0" FontSize="11" Text="Edit" Clicked="EditBtn_Clicked"
-                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"/>
+                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"
+                    BackgroundColor="{StaticResource Secondary}"/>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent"
                   RowDefinitions="*,2*" ColumnDefinitions="*,70">
@@ -29,7 +31,8 @@
                 <Entry Grid.Row="1" x:Name="lastName" Text="{Binding lname}" BackgroundColor="Transparent"
                        FontSize="12" Margin="0,0,0,10" TextColor="Black" IsEnabled="False"/>
                 <Button Margin="10,0,0,0" FontSize="11" Text="Edit" Clicked="EditBtn_Clicked"
-                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"/>
+                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"
+                    BackgroundColor="{StaticResource Secondary}"/>
             </Grid>
             <Grid Grid.Row="2" Grid.ColumnSpan="2"
                   RowDefinitions="*,2*" ColumnDefinitions="*,70">
@@ -38,7 +41,8 @@
                         FontSize="12" Margin="0,0,0,10" Keyboard="Email"
                         TextColor="Black" IsEnabled="False" BackgroundColor="Transparent"/>
                 <Button Margin="10,0,0,0" FontSize="11" Text="Edit" Clicked="EditBtn_Clicked"
-                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"/>
+                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"
+                    BackgroundColor="{StaticResource Secondary}"/>
             </Grid>
             <Grid Grid.Row="3" Grid.ColumnSpan="2"
                   RowDefinitions="*,2*" ColumnDefinitions="*,70">
@@ -47,12 +51,14 @@
                         FontSize="12" Margin="0,0,0,10" BackgroundColor="Transparent"
                         IsPassword="True" IsEnabled="False"/>
                 <Button Margin="10,0,0,0" FontSize="11" Text="Edit" Clicked="EditBtn_Clicked"
-                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start"/>
+                    Grid.Row="1" Grid.Column="1" VerticalOptions="Start" BackgroundColor="{StaticResource Secondary}"/>
             </Grid>
             <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Save changes" VerticalOptions="Center"
-                    BackgroundColor="{StaticResource Secondary}" Margin="0,20,0,0" Clicked="SaveBtn_Clicked"/>
+                    BackgroundColor="#1E852C" Margin="0,20,0,0" Clicked="SaveBtn_Clicked"/>
             <Button Grid.Row="5" Grid.ColumnSpan="2" Text="Cancel" VerticalOptions="Center"
                     BackgroundColor="{StaticResource Primary}" Margin="0,0,0,20" Clicked="CancelBtn_Clicked"/>
+            <Button Grid.Row="6" Grid.ColumnSpan="2" Text="Delete account" VerticalOptions="Center"
+                    BackgroundColor="{StaticResource Tertiary}" Margin="0,0,0,0" Clicked="DeleteBtn_Clicked"/>
         </Grid>
     </ScrollView>
 </ContentPage>

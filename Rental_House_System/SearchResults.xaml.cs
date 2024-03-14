@@ -29,7 +29,6 @@ public partial class SearchResults : ContentPage
             numToilets = 1,
             bills = true,
             internet = true,
-            furnished = true,
             tv = true,
             gym = true,
             lterm = true,

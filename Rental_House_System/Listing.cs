@@ -14,13 +14,13 @@ namespace Rental_House_System
         public string type { get; set; }
         public string available { get; set; }
         public string[] images { get; set; }
+        public string furnished { get; set; } = "Unfurnished";
 
         public int numRooms { get; set; }
         public int numToilets { get; set; }
 
         public bool bills { get; set; } = false;
         public bool internet { get; set; } = false;
-        public bool furnished { get; set; } = false;
         public bool tv { get; set; } = false;
         public bool gym { get; set; } = false;
         public bool lterm { get; set; } = false;
@@ -28,6 +28,7 @@ namespace Rental_House_System
         public bool dishwasher { get; set; } = false;
         public bool wmachine { get; set; } = false;
         public bool park { get; set; } = false;
+        public bool fridge { get; set; } = false;
 
         public string PriceToString()
         {

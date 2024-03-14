@@ -19,6 +19,6 @@ public partial class AccountPage : ContentPage
         bool answer = await DisplayAlert("Are you sure you want to log out?",
             "Please tap yes if you want to sign out of this account.","Yes", "No");
         if(answer)
-            globalref.MainPage = new LoginPage();
+            globalref.LogOut();
     }
 }

@@ -108,10 +108,6 @@ public partial class RentPage : ContentPage
             features.Add("Internet included");
         if (toRent.kitchen)
             features.Add("Kitchen");
-        if (toRent.furnished)
-            features.Add("Furnished");
-        else if (!toRent.furnished)
-            features.Add("Unfurnished");
 
         if (toRent.tv)
             features.Add("TV");
