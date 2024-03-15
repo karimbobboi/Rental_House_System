@@ -10,11 +10,16 @@ namespace Rental_House_System
         public int lId { get; set; }
         public string agentEmail { get; set; }
         public int price { get; set; }
-        public string address { get; set; }
+        //public string address { get; set; }
         public string type { get; set; }
         public string available { get; set; }
         public string images { get; set; }
         public string furnished { get; set; } = "Unfurnished";
+
+        // address
+        public string postcode { get; set; }
+        public string city { get; set; }
+        public string streetName { get; set; }
 
         public int numRooms { get; set; }
         public int numToilets { get; set; }
@@ -33,21 +38,25 @@ namespace Rental_House_System
         public string PriceToString()
         {
             return price.ToString("N0");
-;
         }
-    }
 
-    public class Address
-    {
-        public string postcode { get; set; }
-        public string city { get; set; }
-        public string streetName { get; set; }
-
-        public override string ToString()
+        public string AddressToString()
         {
             return $"{streetName}, {city}, {postcode}";
         }
     }
+
+    //public class Address
+    //{
+    //    public string postcode { get; set; }
+    //    public string city { get; set; }
+    //    public string streetName { get; set; }
+
+    //    public override string ToString()
+    //    {
+    //        return $"{streetName}, {city}, {postcode}";
+    //    }
+    //}
 
     [Table("Agent")]
     public class Agent

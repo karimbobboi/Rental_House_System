@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Rental_House_System;
 
@@ -6,30 +7,6 @@ public class SearchVM : INotifyPropertyChanged
 {
     App globalref = (App)Application.Current;
     AppDatabase AppDB = new AppDatabase();
-
-    //public int lId { get; set; }
-    //public Agent agent { get; set; }
-    //public int price { get; set; }
-    //public Address address { get; set; }
-    //public string type { get; set; }
-    //public string available { get; set; }
-    //public string[] images { get; set; }
-    //public string furnished { get; set; } = "Unfurnished";
-
-    //public int numRooms { get; set; }
-    //public int numToilets { get; set; }
-
-    //public bool bills { get; set; } = false;
-    //public bool internet { get; set; } = false;
-    //public bool tv { get; set; } = false;
-    //public bool gym { get; set; } = false;
-    //public bool lterm { get; set; } = false;
-    //public bool kitchen { get; set; } = false;
-    //public bool dishwasher { get; set; } = false;
-    //public bool wmachine { get; set; } = false;
-    //public bool park { get; set; } = false;
-    //public bool fridge { get; set; } = false;
-
 
     public SearchVM()
     {
@@ -204,65 +181,178 @@ public class SearchVM : INotifyPropertyChanged
         }
     }
 
-    //private string _lname;
-    //public string lname
-    //{
-    //    get { return _lname; }
-    //    set
-    //    {
-    //        if (value != null)
-    //        {
-    //            _lname = value;
-    //            OnPropertyChanged("lname");
-    //        }
-    //    }
-    //}
+    private string _searchTerm = "";
+    public string searchTerm
+    {
+        get
+        {
+            return _searchTerm;
+        }
+        set
+        {
+            if (value != null)
+            {
+                _searchTerm = value;
+                OnPropertyChanged("searchTerm");
+            }
+        }
+    }
 
-    //private string _email;
-    //public string email
-    //{
-    //    get { return _email; }
-    //    set
-    //    {
-    //        if (value != null)
-    //        {
-    //            _email = value;
-    //            OnPropertyChanged("email");
-    //        }
-    //    }
-    //}
 
-    //private string _password;
-    //public string password
-    //{
-    //    get { return _password; }
-    //    set
-    //    {
-    //        if (value != null)
-    //        {
-    //            _password = value;
-    //            OnPropertyChanged("password");
-    //        }
-    //    }
-    //}
+    private int _maxPrice = 1000000;
+    public int maxPrice
+    {
+        get
+        {
+            return _maxPrice;
+        }
+        set
+        {
+            if (value != null)
+            {
+                _maxPrice = value;
+                OnPropertyChanged("maxPrice");
+            }
+        }
+    }
 
-    //public void UpdateUser()
-    //{
-    //    User u = new User();
-    //    u.uid = globalref.activeUser.uid;
-    //    u.fname = fname;
-    //    u.lname = lname;
-    //    u.email = email;
-    //    u.password = password;ssss
+    private int _minPrice = 0;
+    public int minPrice
+    {
+        get
+        {
+            return _minPrice;
+        }
+        set
+        {
+            if (value != null)
+            {
+                _minPrice = value;
+                OnPropertyChanged("minPrice");
+                if(_minPrice > maxPrice)
+                    maxPrice = _minPrice + 5;
+            }
+        }
+    }
 
-    //    // Call the uodate function in Model
-    //    globalref.appDB.UpdateUser(u);
-    //}
+    private int _minBed = 0;
+    public int minBed
+    {
+        get
+        {
+            return _minBed;
+        }
+        set
+        {
+            if (value != null)
+            {
+                if (value < 0)
+                    _minBed = 0;
+                else
+                    _minBed = value;
+                OnPropertyChanged("minBed");
+                if (_minBed > maxBed)
+                    maxBed = _minBed + 1;
+            }
+        }
+    }
 
-    //public void OnSearch()
-    //{
-    //    globalref.appDB.DeleteUser(globalref.activeUser);
-    //}
+
+    private int _maxBed = 10;
+    public int maxBed
+    {
+        get
+        {
+            return _maxBed;
+        }
+        set
+        {
+            if (value != null)
+            {
+                if(value < 1)
+                    _maxBed = 1;
+                else
+                    _maxBed = value;
+                OnPropertyChanged("maxBed");
+            }
+        }
+    }
+
+    private int _minBath = 0;
+    public int minBath
+    {
+        get
+        {
+            return _minBath;
+        }
+        set
+        {
+            if (value != null)
+            {
+                if (value < 1)
+                    _minBath = 1;
+                else
+                    _minBath = value;
+                OnPropertyChanged("minBath");
+                if (_minBath > maxBath)
+                    maxBath = _minBath + 1;
+            }
+        }
+    }
+
+
+    private int _maxBath = 10;
+    public int maxBath
+    {
+        get
+        {
+            return _maxBath;
+        }
+        set
+        {
+            if (value != null)
+            {
+                _maxBath = value;
+                if (value < 1)
+                    _maxBath = 1;
+                else
+                    _maxBath = value;
+                OnPropertyChanged("maxBath");
+            }
+        }
+    }
+
+    public ObservableCollection<Listing> SearchListings()
+    {
+        ObservableCollection<Listing> allListings = globalref.appDB.GetAllListings();
+        // Perform search based on keyword
+        var results = new ObservableCollection<Listing>(
+            allListings.Where(listing =>
+                listing.AddressToString().ToLower().Contains(searchTerm.ToLower()) &&
+                (listing.price >= minPrice && listing.price <= maxPrice) &&
+                (listing.numToilets >= minBath && listing.numToilets <= maxBath) &&
+                (listing.numRooms >= minBed && listing.numRooms <= maxBed) &&
+                (!wMachine || (wMachine && listing.wmachine)) && (!kitchen || (kitchen && listing.kitchen))
+                && (!dishwasher || (dishwasher && listing.dishwasher)) && (!fridge || (fridge && listing.fridge))
+                && (!gym || (gym && listing.gym)) && (!tv || (tv && listing.tv))
+                && (!parking || (parking && listing.park)) && (!bills || (bills && listing.bills))
+                && (!shortTerm || (shortTerm && !(listing.lterm))) && (!internet || (internet && listing.internet))
+            ));
+
+        return results;
+    }
+
+    // clears entire vm
+    public void ResetVM() {
+        searchTerm = "";
+        minPrice = 0;
+
+        kitchen = false; wMachine = false;
+        gym = false; parking = false;
+        shortTerm = false; bills = false;
+        fridge = false; internet = false;
+        tv = false; dishwasher = false;
+    }
 }
 
 
@@ -273,6 +363,7 @@ public partial class SearchPage : ContentPage
 	{
 		InitializeComponent();
         searchVM = new SearchVM();
+        searchVM.maxPrice = 100; // set the initial value for max price
         BindingContext = searchVM;
         furnishing.SelectedIndex = 0;
         radiusPicker.SelectedIndex = 0;
@@ -282,8 +373,9 @@ public partial class SearchPage : ContentPage
     async void SearchButton_Clicked(System.Object sender, System.EventArgs e)
     {
         App globalref = (App)Application.Current;
-        if (searchBar.Text != "")
-		    await Navigation.PushAsync(new SearchResults(globalref.appDB.GetAllListings()));
+        if (searchBar.Text != "") 
+                await Navigation.PushAsync(new SearchResults(searchVM.SearchListings()));
+        //await Navigation.PushAsync(new SearchResults(globalref.appDB.GetAllListings()));
     }
 
     async void FiltersButton_Clicked(System.Object sender, System.EventArgs e)
@@ -291,5 +383,45 @@ public partial class SearchPage : ContentPage
         await Navigation.PushModalAsync(new SearchFiltersModal(searchVM));
     }
 
-    void ClearButton_Clicked(System.Object sender, System.EventArgs e) { }
+    void ClearButton_Clicked(System.Object sender, System.EventArgs e) {
+        searchVM.ResetVM();
+    }
+
+    // to make sure max price is always greater than min price
+    void MaxEntry_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
+    {
+        string valueString = maxPriceEntry.Text.Replace("£", "");
+        int.TryParse(valueString, out int newValue);
+        searchVM.maxPrice = newValue;
+
+        if (searchVM.maxPrice < 5)
+            searchVM.minPrice = 0;
+        else if (searchVM.minPrice > searchVM.maxPrice)
+            searchVM.minPrice = searchVM.maxPrice - 5;
+    }
+
+    void MinEntry_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
+    {
+        string valueString = minPriceEntry.Text.Replace("£", "");
+        int.TryParse(valueString, out int newValue);
+        searchVM.minPrice = newValue;
+    }
+
+    // to make sure max bed is always greater than min bed
+    void MaxBed_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
+    {
+        if (searchVM.maxBed <= 0)
+            searchVM.minBed = 0;
+        else if (searchVM.minBed > searchVM.maxBed)
+            searchVM.minBed = searchVM.maxBed - 1;
+    }
+
+    // to make sure max bathrooms is always greater than min bathrooms
+    void MaxBath_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
+    {
+        if (searchVM.maxBath <= 0)
+            searchVM.minBath = 0;
+        else if (searchVM.minBath > searchVM.maxBath)
+            searchVM.minBath = searchVM.maxBath - 1;
+    }
 }

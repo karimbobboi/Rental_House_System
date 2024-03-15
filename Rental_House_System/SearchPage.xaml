@@ -27,7 +27,7 @@
             </Grid.ColumnDefinitions>
 
             <SearchBar x:Name="searchBar" Placeholder="Enter location or postcode"
-                       Grid.Row="0" Grid.ColumnSpan="2" Text=""/>
+                       Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding searchTerm}"/>
 
             <Label Text="Radius" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" Margin="0,10,0,0"/>
             <Picker Grid.Row="1" Grid.Column="1" x:Name="radiusPicker"
@@ -76,15 +76,17 @@
                     <Border Stroke="Gray" Margin="0,0,0,0"
                         StrokeThickness="1" Grid.Column="0"
                         StrokeShape="RoundRectangle 10,10,10,10">
-                        <Entry Margin="10,0,0,0" BackgroundColor="Transparent" Keyboard="Numeric"
-                            Placeholder="Min" VerticalOptions="Center" VerticalTextAlignment="Start"/>
+                        <Entry Margin="10,0,0,0" BackgroundColor="Transparent" Keyboard="Numeric" Text="{Binding minPrice, StringFormat='£{0}'}"
+                            Placeholder="Min" VerticalOptions="Center" TextChanged="MinEntry_TextChanged"
+                            x:Name="minPriceEntry" VerticalTextAlignment="Start"/>
                      </Border>
                     <Label Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="—"/>
                     <Border Stroke="Gray" Margin="0,0,0,0"
                         StrokeThickness="1"  Grid.Column="2"
                         StrokeShape="RoundRectangle 10,10,10,10">
-                        <Entry Margin="10,0,0,0" BackgroundColor="Transparent" Keyboard="Numeric"
-                            Placeholder="Max" VerticalOptions="Center" VerticalTextAlignment="Start"/>
+                        <Entry Margin="10,0,0,0" BackgroundColor="Transparent" Keyboard="Numeric" Text="{Binding maxPrice, StringFormat='£{0}'}"
+                            Placeholder="Max" VerticalOptions="Center" x:Name="maxPriceEntry"
+                            VerticalTextAlignment="Start" TextChanged="MaxEntry_TextChanged"/>
                     </Border>
                 </Grid>
             </VerticalStackLayout>
@@ -95,14 +97,16 @@
                         StrokeThickness="1" Grid.Column="0"
                         StrokeShape="RoundRectangle 10,10,10,10">
                         <Entry Margin="10,0,0,0" BackgroundColor="Transparent" Keyboard="Numeric"
-                            Placeholder="Min" VerticalOptions="Center" VerticalTextAlignment="Start"/>
+                            Placeholder="Min" VerticalOptions="Center" Text="{Binding minBed}"
+                            VerticalTextAlignment="Start"/>
                      </Border>
                     <Label Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="—"/>
                     <Border Stroke="Gray" Margin="0,0,0,0"
                         StrokeThickness="1"  Grid.Column="2"
                         StrokeShape="RoundRectangle 10,10,10,10">
                         <Entry Margin="10,0,0,0" BackgroundColor="Transparent" Keyboard="Numeric"
-                            Placeholder="Max" VerticalOptions="Center" VerticalTextAlignment="Start"/>
+                            Placeholder="Max" VerticalOptions="Center" Text="{Binding maxBed}"
+                            VerticalTextAlignment="Start" TextChanged="MaxBed_TextChanged"/>
                     </Border>
                 </Grid>
             </VerticalStackLayout>
@@ -113,14 +117,16 @@
                         StrokeThickness="1" Grid.Column="0"
                         StrokeShape="RoundRectangle 10,10,10,10">
                         <Entry Margin="10,0,0,0" BackgroundColor="Transparent" Keyboard="Numeric"
-                            Placeholder="Min" VerticalOptions="Center" VerticalTextAlignment="Start"/>
+                            Placeholder="Min" VerticalOptions="Center" Text="{Binding minBath}"
+                            VerticalTextAlignment="Start"/>
                      </Border>
                     <Label Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="—"/>
                     <Border Stroke="Gray" Margin="0,0,0,0"
                         StrokeThickness="1"  Grid.Column="2"
                         StrokeShape="RoundRectangle 10,10,10,10">
                         <Entry Margin="10,0,0,0" BackgroundColor="Transparent" Keyboard="Numeric"
-                            Placeholder="Max" VerticalOptions="Center" VerticalTextAlignment="Start"/>
+                            Placeholder="Max" VerticalOptions="Center" Text="{Binding maxBath}"
+                            VerticalTextAlignment="Start" TextChanged="MaxBath_TextChanged"/>
                     </Border>
                 </Grid>
             </VerticalStackLayout>

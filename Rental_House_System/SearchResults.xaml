@@ -42,8 +42,16 @@
                                         IndicatorColor="LightGray" SelectedIndicatorColor="#474747"
                                         HorizontalOptions="Center" />
                                 </Grid>
-                                <Label Text="{Binding address}" Margin="10,10,10,0"
-                                    FontAttributes="Bold" />
+                                <Label Margin="10,10,10,0"
+                                    FontAttributes="Bold">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0}, {1}, {2}">
+                                                <Binding Path="streetName" />
+                                                <Binding Path="city" />
+                                                <Binding Path="postcode" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
                                 <Label Text="{Binding type}" Margin="10,5,10,0"/>
                                 <Label Text="{Binding price, StringFormat='£{0:N0} pcm'}"
                                    Margin="10,0,10,0"/>

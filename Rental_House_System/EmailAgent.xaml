@@ -5,28 +5,28 @@
              Title="Email agent">
     <Grid Margin="20,20,20,0" RowDefinitions="*,*,50">
         <VerticalStackLayout Grid.Row="0" Spacing="20">
-        <Grid ColumnDefinitions="120,*" Margin="0,0,0,0" ColumnSpacing="0" x:Name="propertyViewer">
-            <Image x:Name="propertyViewerImage" Grid.Column="0" HorizontalOptions="Start"
-                   Source="{Binding images[0]}" HeightRequest="80"/>
-            <VerticalStackLayout Margin="10,0,0,0" Grid.Column="1" HorizontalOptions="Start">
-                <Label FontSize="15" Text="{Binding address}" LineBreakMode="WordWrap"/>
-                <Label Text="{Binding type}"/>
-                <Label Text="{Binding price, StringFormat='£{0:N0} pcm'}"/>
-            </VerticalStackLayout>
-        </Grid>
+            <Grid ColumnDefinitions="120,*" Margin="0,0,0,0" ColumnSpacing="0" x:Name="propertyViewer">
+                <Image x:Name="propertyViewerImage" Grid.Column="0" HorizontalOptions="Start"
+                       HeightRequest="80"/>
+                <VerticalStackLayout Margin="10,0,0,0" Grid.Column="1" HorizontalOptions="Start">
+                    <Label FontSize="15" Text="{Binding address}" LineBreakMode="WordWrap"/>
+                    <Label Text="{Binding type}"/>
+                    <Label Text="{Binding price, StringFormat='£{0:N0} pcm'}"/>
+                </VerticalStackLayout>
+            </Grid>
 
             <Frame Grid.Row="1" Grid.ColumnSpan="2" BorderColor="Black" CornerRadius="5" Padding="0">
-    <Grid>
-        <Editor x:Name="editor" MaxLength="250" HeightRequest="250" AutoSize="TextChanges"
-            Placeholder="Enter your message here"/>
-        <Label Text="{Binding Source={x:Reference editor}, Path=Text.Length, StringFormat='{0}/250'}"
-               HorizontalOptions="End" VerticalOptions="End"
-               TextColor="Grey" FontSize="12"
-               Margin="0,0,10,10"/>
-    </Grid>
-</Frame>
-            </VerticalStackLayout>
+                <Grid>
+                    <Editor x:Name="editor" MaxLength="250" HeightRequest="250" AutoSize="TextChanges"
+                        Placeholder="Enter your message here"/>
+                    <Label Text="{Binding Source={x:Reference editor}, Path=Text.Length, StringFormat='{0}/250'}"
+                           HorizontalOptions="End" VerticalOptions="End"
+                           TextColor="Grey" FontSize="12"
+                           Margin="0,0,10,10"/>
+                </Grid>
+            </Frame>
+        </VerticalStackLayout>
         <Button Grid.Row="2" VerticalOptions="End" Text="Submit" Margin="0,0,0,10"
-            BackgroundColor="{StaticResource Secondary}"/>
+            BackgroundColor="{StaticResource Secondary}" Clicked="SendButton_Clicked"/>
     </Grid>
 </ContentPage>

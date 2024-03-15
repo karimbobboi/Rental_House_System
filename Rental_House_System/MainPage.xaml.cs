@@ -12,12 +12,6 @@ public partial class MainPage : ContentPage
 	async private void OnCounterClicked(object sender, EventArgs e)
 	{
         string[] imgs = { "house2.jpeg", "house2_bed.jpeg", "house2_out.jpeg", "house2_toilet.jpeg" };
-        Address a = new Address()
-        {
-            streetName = "Verney Park Campus, London Road",
-            postcode = "MK18 1AD",
-            city = "Buckignham"
-        };
 
         Agent ag = new Agent()
         {
@@ -35,7 +29,9 @@ public partial class MainPage : ContentPage
             price = 1790,
             agentEmail = tempAgent.email,
             images = imgsString,
-            address = a.ToString(),
+            streetName = "Verney Park Campus, London Road",
+            postcode = "MK18 1AD",
+            city = "Buckignham",
             type = "Apartment",
             available = "12/2/2001",
             numRooms = 2,
@@ -51,7 +47,29 @@ public partial class MainPage : ContentPage
             park = true
         };
 
+        string[] imgs2 = { "living_room.jpeg", "house_example.jpeg", "bathroom.jpeg" };
+
+        imgsString = globalref.appDB.ArrayToImageString(imgs2);
+
+        Listing r2 = new Listing()
+        {
+            lId = 1,
+            price = 1790,
+            agentEmail = tempAgent.email,
+            images = imgsString,
+            streetName = "London Road",
+            postcode = "PK18 1AG",
+            city = "Leeds",
+            type = "Apartment",
+            available = "12/2/2001",
+            numRooms = 2,
+            numToilets = 1,
+            dishwasher = true,
+            wmachine = true
+        };
+
         globalref.appDB.AddListing(r);
+        globalref.appDB.AddListing(r2);
         //await Navigation.PushAsync(new RentPage(r));
         //await Navigation.PushAsync(new EmailAgent(r));
 
