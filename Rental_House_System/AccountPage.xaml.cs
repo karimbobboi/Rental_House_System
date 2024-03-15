@@ -12,8 +12,8 @@ public partial class AccountPage : ContentPage
         //profile.BindingContext = globalref.activeUser;
         editUserVM = new EditUserVM();
         BindingContext = editUserVM;
-        savedListings.ItemsSource = editUserVM.allListings;
-        recentListings.ItemsSource = editUserVM.allListings;
+        //savedListings.ItemsSource = editUserVM.SavedListingsCollection;//editUserVM.allListings;
+        recentListings.ItemsSource = editUserVM.AllListings;
     }
 
     async void OnGridTapped(object sender, EventArgs args)

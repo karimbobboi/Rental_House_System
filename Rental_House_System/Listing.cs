@@ -67,5 +67,14 @@ namespace Rental_House_System
         public string email { get; set; }
         public string phone { get; set; }
     }
+
+    [Table("Saved")]
+    public class Saved
+    {
+        [PrimaryKey, AutoIncrement]
+        public int savedId { get; set; }
+        public int userId { get; set; }
+        public int listingId { get; set; }
+    }
 }
 

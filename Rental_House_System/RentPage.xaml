@@ -30,6 +30,9 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
+                    <Button Text="&#9825;" TextColor="Black" Clicked="Button_Clicked" HeightRequest="30"
+                               x:Name="savedBtn" FontSize="25" CornerRadius="50" Padding="0" Margin="0,0,20,0"
+                               HorizontalOptions="End" BackgroundColor="Transparent"/>
             </StackLayout>
             <StackLayout Grid.Row="1" Orientation="Vertical"
                          Margin="20,0,20,0" Spacing="10" >

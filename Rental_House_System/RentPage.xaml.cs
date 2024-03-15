@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
-using Android.Widget;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Graphics.Text;
 using static Java.Util.Jar.Attributes;
 using static System.Net.Mime.MediaTypeNames;
 using System.Reflection;
+using System.ComponentModel;
 
 namespace Rental_House_System;
 
@@ -26,10 +26,74 @@ public class MainViewModel : BindableObject
         toRent = temp;
         ImageList = globalref.appDB.ImageStringToArray(toRent);
 
+        if (globalref.appDB.GetSavedByIds(globalref.activeUser.uid, toRent.lId) == null)
+        {
+            System.Diagnostics.Debug.WriteLine("wertyui");
+            saved = false;
+        }
+        else
+        {
+            System.Diagnostics.Debug.WriteLine("wertyu12212122i");
+            saved = true;
+        }
+
     }
 
-    void Button_Clicked(System.Object sender, System.EventArgs e)
+    public event PropertyChangedEventHandler PropertyChanged;
+    private void OnPropertyChanged(string propertyName)
     {
+        if (PropertyChanged != null)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    private bool _saved = false;
+    public bool saved { get {
+            return _saved;
+        }
+        set
+        {
+            if (value != null)
+            {
+                _saved = value;
+                OnPropertyChanged("saved");
+            }
+        }
+    }
+
+    public int AddSaved()
+    {
+        Saved s = new Saved();
+        s.userId = globalref.activeUser.uid;
+        s.listingId = toRent.lId;
+        int res;
+        if (globalref.appDB.GetSavedByIds(globalref.activeUser.uid, toRent.lId) == null) {
+            res = globalref.appDB.AddSaved(s);
+        } else
+        {
+            res = globalref.appDB.UpdateSaved(s);
+            
+        }
+        globalref.LoadSavedListingsCollection();
+        MessagingCenter.Send<MainViewModel, string>(this, "CollectionChanged", "CollectionUpdated");
+        return res;
+
+        // Call the uodate function in Model
+    }
+
+    public int RemoveSaved()
+    {
+        Saved s = globalref.appDB.GetSavedByIds(globalref.activeUser.uid, toRent.lId);
+        int res = -1;
+        if (s != null)
+        {
+            res = globalref.appDB.DeleteSaved(s);
+        }
+        MessagingCenter.Send<MainViewModel, string>(this, "CollectionChanged", "CollectionUpdated");
+        return res;
+
+        // Call the uodate function in Model
     }
 }
 
@@ -53,6 +117,9 @@ public partial class RentPage : ContentPage
     public string fullText;
     public Listing toRent;
 
+    public readonly string blankSaved = "\u2661";
+    public readonly string fullSaved = "\u2665";
+
     App globalref = (App)Microsoft.Maui.Controls.Application.Current;
     private MainViewModel images;
 
@@ -63,7 +130,7 @@ public partial class RentPage : ContentPage
         //ImageList = globalref.appDB.ImageStringToArray(toRent);
         
         images = new MainViewModel(temp);
-        imgSlider.BindingContext = images;
+        BindingContext = images;
         rrr.BindingContext = toRent;
 
         currentImg = "1";
@@ -71,6 +138,15 @@ public partial class RentPage : ContentPage
         fullText = currentImg + "/" + totalImgs;
 
         initLabels();
+
+        if(images.saved)
+        {
+            savedBtn.Text = fullSaved;
+            savedBtn.FontSize = 18;
+        } else {
+            savedBtn.Text = blankSaved;
+            savedBtn.FontSize = 25;
+        }
     }
 
     void ShowBtn_Clicked(System.Object sender, System.EventArgs e)
@@ -196,6 +272,21 @@ public partial class RentPage : ContentPage
         if (answer)
         {
             
+        }
+    }
+
+    void Button_Clicked(System.Object sender, System.EventArgs e)
+    {
+        Button button = sender as Button;
+        if (button.Text == "\u2661") {
+            button.Text = "\u2665";
+            button.FontSize = 18;
+            images.AddSaved();
+        } else if (button.Text == "\u2665")
+        {
+            button.Text = "\u2661";
+            button.FontSize = 25;
+            images.RemoveSaved();
         }
     }
 }

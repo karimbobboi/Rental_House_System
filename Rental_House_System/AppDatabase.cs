@@ -5,11 +5,13 @@ using SQLite;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using static Android.Provider.CalendarContract;
+using static Android.Graphics.ColorSpace;
 
 namespace Rental_House_System
 {
 	public class AppDatabase
 	{
+        
         public string CurrentState; // to hold the current db state
         static SQLiteConnection DatabaseConnection; // to hold and establish the connection
 
@@ -23,6 +25,7 @@ namespace Rental_House_System
                 DatabaseConnection.CreateTable<User>();
                 DatabaseConnection.CreateTable<Agent>();
                 DatabaseConnection.CreateTable<Listing>();
+                DatabaseConnection.CreateTable<Saved>();
                 // set the status of the DB
                 CurrentState = "Database and Table Created";
             }
@@ -153,15 +156,6 @@ namespace Rental_House_System
             return listings;
         }
         // Return a user based on email
-        public Listing SearchListings(Listing listing)
-        {
-
-            // Query to return all users in the DB
-            //var user = (from u in DatabaseConnection.Table<User>()
-            //            where u.email == email
-            //            select u).FirstOrDefault();
-            return null;
-        }
 
         public string ArrayToImageString(string[] imgs)
         {
@@ -172,6 +166,61 @@ namespace Rental_House_System
         public string[] ImageStringToArray(Listing listing) {
             string[] stringArray = listing.images.Split(',');
             return stringArray;
+        }
+
+        //Saved functions
+        public int AddSaved(Saved saved)
+        {
+            // Insert into the table and return the status of the inset
+            var insertstatus = DatabaseConnection.Insert(saved);
+            
+            System.Diagnostics.Debug.WriteLine(insertstatus);
+            return insertstatus;
+        }
+        // Delete a user
+        public int DeleteSaved(Saved saved)
+        {
+            // Query to return all users in the DB
+            var deletestatus = DatabaseConnection.Delete(saved);
+            return deletestatus;
+        }
+        // Update a user
+        public int UpdateSaved(Saved saved)
+        {
+            // Query to return all users in the DB
+            var updatestatus = DatabaseConnection.Update(saved);
+            return updatestatus;
+        }
+
+        // Return ALL users
+        public ObservableCollection<Saved> GetAllSaved()
+        {
+            ObservableCollection<Saved> saved;
+            // Query to return all users in the DB
+            var allSaved = DatabaseConnection.Table<Saved>();
+            saved = new ObservableCollection<Saved>(allSaved.ToList());
+            return saved;
+        }
+        public ObservableCollection<Saved> GetAllSavedByUserID(int uId)
+        {
+
+            // Query to return all users in the DB
+            var saved = (from s in DatabaseConnection.Table<Saved>()
+                         where s.userId == uId
+                         select s).ToList();
+            ObservableCollection<Saved> savedCollection = new ObservableCollection<Saved>(saved);
+            return savedCollection;
+        }
+
+
+        public Saved GetSavedByIds(int uId, int lId)
+        {
+
+            // Query to return all users in the DB
+            var saved = (from s in DatabaseConnection.Table<Saved>()
+                        where s.userId == uId && s.listingId == lId
+                         select s).FirstOrDefault();
+            return saved;
         }
     }
 }

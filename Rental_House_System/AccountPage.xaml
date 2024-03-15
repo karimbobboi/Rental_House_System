@@ -37,7 +37,7 @@
                 <Frame BorderColor="Gray" CornerRadius="5" Padding="5" HasShadow="True">
                     <Grid RowDefinitions="*, 20" HeightRequest="100">
                         <CarouselView Grid.Row="0" x:Name="savedListings"  EmptyView="No listings saved"
-                            IndicatorView="indicatorView">
+                            ItemsSource="{Binding SavedListingsCollection}" IndicatorView="indicatorView">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid RowDefinitions="*,*" ColumnDefinitions="100, *"

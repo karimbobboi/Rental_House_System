@@ -16,6 +16,7 @@ public partial class LoginPage : ContentPage
             if (u != null) {
                 if (u.password == pass.Text) {
                     globalref.activeUser = u;
+                    globalref.LoadSavedListingsCollection();
                     await DisplayAlert("Login successful", $"Welcome back, {u.fname}", "Continue");
                     globalref.MainPage = new AppShell();
                 }

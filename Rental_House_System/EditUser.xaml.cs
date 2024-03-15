@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection.PortableExecutable;
 using Microsoft.Maui.Controls.Compatibility;
+using static Android.Service.Notification.NotificationListenerService;
 
 namespace Rental_House_System;
 
@@ -8,14 +10,22 @@ public class EditUserVM : INotifyPropertyChanged
 {
     User UserInstance;
     App globalref = (App)Application.Current;
-    public ObservableCollection<Listing> allListings = new ObservableCollection<Listing>();
+    public ObservableCollection<Saved> savedListings = new ObservableCollection<Saved>();
+
     AppDatabase AppDB = new AppDatabase();
     public EditUserVM()
     {
         //AllStudents = student.LoadAllStudents();
         UserInstance = new User();
-        allListings = globalref.appDB.GetAllListings();
         ActiveUser = globalref.activeUser;
+        AllListings = globalref.appDB.GetAllListings();
+        SavedListingsCollection = GetSavedListingsCollection();
+
+        MessagingCenter.Subscribe<MainViewModel, string>(this, "CollectionChanged", (sender, arg) =>
+        {
+            SavedListingsCollection = GetSavedListingsCollection();
+            System.Diagnostics.Debug.WriteLine("rdectfvgybhuij " + SavedListingsCollection.Count);
+        });
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
@@ -24,6 +34,34 @@ public class EditUserVM : INotifyPropertyChanged
         if (PropertyChanged != null)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    private ObservableCollection<Listing> allListings;
+    public ObservableCollection<Listing> AllListings
+    {
+        get { return allListings; }
+        set
+        {
+            if (value != null)
+            {
+                allListings = value;
+                OnPropertyChanged("AllListings");
+            }
+        }
+    }
+
+    private ObservableCollection<Listing> savedListingsCollection;
+    public ObservableCollection<Listing> SavedListingsCollection
+    {
+        get { return savedListingsCollection; }
+        set
+        {
+            if (value != null)
+            {
+                savedListingsCollection = value;
+                OnPropertyChanged("SavedListingsCollection");
+            }
         }
     }
 
@@ -119,6 +157,18 @@ public class EditUserVM : INotifyPropertyChanged
     public void DeleteUser()
     {
         globalref.appDB.DeleteUser(globalref.activeUser);
+    }
+
+    public ObservableCollection<Listing> GetSavedListingsCollection()
+    {
+        ObservableCollection<Listing> AllListings = globalref.appDB.GetAllListings();
+        ObservableCollection<Saved> savedListings = globalref.appDB.GetAllSavedByUserID(activeUser.uid);
+
+        var idsToFilter = savedListings.Select(saved => saved.listingId).ToArray();
+        var listingsWithMatchingIds = AllListings.Where(listing => idsToFilter.Contains(listing.lId)).ToList();
+
+        ObservableCollection<Listing> saved = new ObservableCollection<Listing>(listingsWithMatchingIds);
+        return saved;
     }
 }
 
