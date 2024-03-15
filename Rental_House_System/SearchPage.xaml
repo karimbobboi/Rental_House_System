@@ -44,11 +44,12 @@
                 </Picker.ItemsSource>
             </Picker>
             <Label Text="Property Type" Grid.Row="2" Grid.Column="0" FontAttributes="Bold" Margin="0,10,0,0"/>
-            <Picker Grid.Row="2" Grid.Column="2" x:Name="propertyPicker"
-                    SelectedIndex="0" VerticalOptions="Start" VerticalTextAlignment="Start">
+            <Picker Grid.Row="2" Grid.Column="2" x:Name="propertyPicker" SelectedIndex="{Binding propType}" 
+                    VerticalOptions="Start" VerticalTextAlignment="Start">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Any</x:String>
+                        <x:String>Apartment</x:String>
                         <x:String>Detached</x:String>
                         <x:String>Semi-Detached</x:String>
                         <x:String>Terraced</x:String>
@@ -58,8 +59,8 @@
                 </Picker.ItemsSource>
             </Picker>
             <Label Text="Furnished" Grid.Row="3" Grid.Column="0" FontAttributes="Bold" Margin="0,10,0,0"/>
-            <Picker Grid.Row="3" Grid.Column="1" x:Name="furnishing"
-                    SelectedIndex="0" VerticalOptions="Start" VerticalTextAlignment="Start">
+            <Picker Grid.Row="3" Grid.Column="1" x:Name="furnishing" SelectedIndex="{Binding furnishing}" 
+                    VerticalOptions="Start" VerticalTextAlignment="Start">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Any</x:String>

@@ -21,25 +21,39 @@ public class SearchVM : INotifyPropertyChanged
         }
     }
 
-    //private Listing activeUser;
-    //public User ActiveUser
-    //{
-    //    get
-    //    {
-    //        return activeUser;
-    //    }
-    //    set
-    //    {
-    //        if (activeUser != value)
-    //        {
-    //            activeUser = value;
-    //            fname = activeUser.fname;
-    //            lname = activeUser.lname;
-    //            email = activeUser.email;
-    //            password = activeUser.password;
-    //        }
-    //    }
-    //}
+    private int _propType = 0;
+    public int propType
+    {
+        get
+        {
+            return _propType;
+        }
+        set
+        {
+            if (value != null)
+            {
+                _propType = value;
+                OnPropertyChanged("propType");
+            }
+        }
+    }
+
+    private int _furnishing = 0;
+    public int furnishing
+    {
+        get
+        {
+            return _furnishing;
+        }
+        set
+        {
+            if (value != null)
+            {
+                _furnishing = value;
+                OnPropertyChanged("furnishing");
+            }
+        }
+    }
 
     private bool _kitchen;
     public bool kitchen
@@ -325,6 +339,8 @@ public class SearchVM : INotifyPropertyChanged
     public ObservableCollection<Listing> SearchListings()
     {
         ObservableCollection<Listing> allListings = globalref.appDB.GetAllListings();
+        string[] propTypes = { "Apartment", "Detached", "Semi-Detached", "Terraced", "Flat", "Bungalow" };
+        string[] furnishings = { "Furnished", "Part furnished", "Unfurnished" };
         // Perform search based on keyword
         var results = new ObservableCollection<Listing>(
             allListings.Where(listing =>
@@ -332,11 +348,13 @@ public class SearchVM : INotifyPropertyChanged
                 (listing.price >= minPrice && listing.price <= maxPrice) &&
                 (listing.numToilets >= minBath && listing.numToilets <= maxBath) &&
                 (listing.numRooms >= minBed && listing.numRooms <= maxBed) &&
+                (propType == 0 || (listing.type == propTypes[propType - 1])) &&
+                (furnishing == 0 || (listing.type == furnishings[furnishing - 1])) &&
                 (!wMachine || (wMachine && listing.wmachine)) && (!kitchen || (kitchen && listing.kitchen))
                 && (!dishwasher || (dishwasher && listing.dishwasher)) && (!fridge || (fridge && listing.fridge))
-                && (!gym || (gym && listing.gym)) && (!tv || (tv && listing.tv))
+                && (!gym || (gym && listing.gym)) && (!internet || (internet && listing.internet))
                 && (!parking || (parking && listing.park)) && (!bills || (bills && listing.bills))
-                && (!shortTerm || (shortTerm && !(listing.lterm))) && (!internet || (internet && listing.internet))
+                && (!shortTerm || (shortTerm && !(listing.lterm))) && (!tv || (tv && listing.tv))
             ));
 
         return results;
@@ -345,7 +363,11 @@ public class SearchVM : INotifyPropertyChanged
     // clears entire vm
     public void ResetVM() {
         searchTerm = "";
+        propType = 0;
+        furnishing = 0;
         minPrice = 0;
+        minBath = 0;
+        minBed = 0;
 
         kitchen = false; wMachine = false;
         gym = false; parking = false;
@@ -367,7 +389,7 @@ public partial class SearchPage : ContentPage
         BindingContext = searchVM;
         furnishing.SelectedIndex = 0;
         radiusPicker.SelectedIndex = 0;
-        propertyPicker.SelectedIndex = 0;
+        //propertyPicker.SelectedIndex = 0;
     }
 
     async void SearchButton_Clicked(System.Object sender, System.EventArgs e)

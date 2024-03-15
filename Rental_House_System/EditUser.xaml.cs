@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Microsoft.Maui.Controls.Compatibility;
 
 namespace Rental_House_System;
@@ -7,11 +8,13 @@ public class EditUserVM : INotifyPropertyChanged
 {
     User UserInstance;
     App globalref = (App)Application.Current;
+    public ObservableCollection<Listing> allListings = new ObservableCollection<Listing>();
     AppDatabase AppDB = new AppDatabase();
     public EditUserVM()
     {
         //AllStudents = student.LoadAllStudents();
         UserInstance = new User();
+        allListings = globalref.appDB.GetAllListings();
         ActiveUser = globalref.activeUser;
     }
 
@@ -123,14 +126,14 @@ public partial class EditUser : ContentPage
 {
     App globalref = (App)Application.Current;
     EditUserVM editUserVM;
-    public EditUser()
+    public EditUser(EditUserVM temp)
 	{
 		InitializeComponent();
         //firstNameGrid.BindingContext = globalref.activeUser;
-        
-        editUserVM = new EditUserVM();
-        System.Diagnostics.Debug.WriteLine("saddasdasad");     
-        BindingContext = editUserVM; System.Diagnostics.Debug.WriteLine("saddasdasad2");
+
+        //editUserVM = new EditUserVM();
+        editUserVM = temp; 
+        BindingContext = editUserVM;
         //fields.BindingContext = globalref.activeUser;
 
     }
@@ -167,7 +170,7 @@ public partial class EditUser : ContentPage
                 //globalref.appDB.UpdateUser(u);
                 editUserVM.UpdateUser();
                 await DisplayAlert("Changes to profile completed",
-                    $"{firstName.Text} , {globalref.activeUser.fname}", "Continue");
+                    "", "Continue");
                 await Navigation.PopAsync();
             }
             else

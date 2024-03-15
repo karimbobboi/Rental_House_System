@@ -11,8 +11,8 @@ namespace Rental_House_System
         public string agentEmail { get; set; }
         public int price { get; set; }
         //public string address { get; set; }
-        public string type { get; set; }
-        public string available { get; set; }
+        public string type { get; set; } = "Detached";
+        public string available { get; set; } 
         public string images { get; set; }
         public string furnished { get; set; } = "Unfurnished";
 

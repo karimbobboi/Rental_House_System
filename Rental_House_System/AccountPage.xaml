@@ -2,30 +2,129 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Rental_House_System.AccountPage"
+             xmlns:local="clr-namespace:Rental_House_System"
              Title="Profile">
+    <ContentPage.Resources>
+        <local:FirstValueOfArrayConverter x:Key="FirstValueOfArrayConverter" />
+    </ContentPage.Resources>
+
     <ScrollView>
-        <Grid x:Name="profile" RowDefinitions="100, *, *, 60">
-            <Grid Grid.Row="0" BackgroundColor="AliceBlue"
+        <Grid x:Name="profile" RowDefinitions="100, 170, 170, *, 60">
+            <Grid Grid.Row="0" BackgroundColor="{StaticResource Primary}"
                   ColumnDefinitions="80, *, *" RowDefinitions="*, *">
 
                 <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="10,0,0,0"
                        Source="bootstrap_person_circle.svg" HeightRequest="40"/>
                 <VerticalStackLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
                                      Margin="10,0,0,0" VerticalOptions="Center">
-                    <Label Text="{Binding fname}" FontSize="18"
+                    <Label Text="{Binding fname}" FontSize="18" TextColor="White"
                        VerticalTextAlignment="Center"/>
                     <Label Text="Edit profile" FontSize="16"
-                       TextColor="Grey" VerticalTextAlignment="Center"/>
+                       TextColor="{StaticResource Gray200}" VerticalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <Label Grid.Column="2" Grid.RowSpan="2" Text=">" FontAttributes="Bold" FontSize="20"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="End" Margin="0,0,10,0"/>
+                <Label Grid.Column="2" Grid.RowSpan="2" Text=">" TextColor="White" FontAttributes="Bold" FontSize="20"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="End" Margin="0,0,20,0"/>
 
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnGridTapped"
                               NumberOfTapsRequired="1" />
                 </Grid.GestureRecognizers>
             </Grid>
-            <Button Grid.Row="3" VerticalOptions="Center" Margin="20,0,20,0" Clicked="LogOutBtn_Clicked"
+
+            <!--View for user saved listings-->
+            <VerticalStackLayout Margin="20,20,20,0" Grid.Row="1" Spacing="5">
+                <Label Text="Saved listings" FontSize="17" FontAttributes="Bold"/>
+                <Frame BorderColor="Gray" CornerRadius="5" Padding="5" HasShadow="True">
+                    <Grid RowDefinitions="*, 20" HeightRequest="100">
+                        <CarouselView Grid.Row="0" x:Name="savedListings"  EmptyView="No listings saved"
+                            IndicatorView="indicatorView">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid RowDefinitions="*,*" ColumnDefinitions="100, *"
+                                          ColumnSpacing="10" Padding="0" BackgroundColor="Transparent">
+                                        <Image Source="{Binding images, Converter={StaticResource FirstValueOfArrayConverter}}"
+                                               Grid.RowSpan="2" Grid.Row="0" VerticalOptions="Start"
+                                               Aspect="AspectFill" />
+                                        <VerticalStackLayout Spacing="10"
+                                            Grid.Column="1" Grid.Row="0">
+                                            <Label FontSize="13" FontAttributes="Bold"
+                                                TextColor="Black">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0}, {1}, {2}">
+                                                        <Binding Path="streetName" />
+                                                        <Binding Path="city" />
+                                                        <Binding Path="postcode" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                            <Label FontSize="13" Text="{Binding price, StringFormat='£{0:N0} pcm'}"
+                                                   VerticalOptions="Start" VerticalTextAlignment="Start"
+                                                    TextColor="Black"/>
+
+                                        </VerticalStackLayout>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnSavedGridTapped"
+                                                NumberOfTapsRequired="1" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <IndicatorView x:Name="indicatorView"
+                            Grid.Row="1" VerticalOptions="End" Margin="0,0,0,0"
+                            IndicatorColor="LightGray" SelectedIndicatorColor="#474747"
+                            HorizontalOptions="Center" />
+                    </Grid>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!--View for recently viewed listings-->
+            <VerticalStackLayout Margin="20,20,20,0" Grid.Row="2" Spacing="5">
+                <Label Text="Recently viewed listings" FontSize="17" FontAttributes="Bold"/>
+                <Frame BorderColor="Gray" CornerRadius="5" Padding="5" HasShadow="True">
+                    <Grid RowDefinitions="*, 20" HeightRequest="100">
+                        <CarouselView Grid.Row="0" x:Name="recentListings"  EmptyView="No listings saved"
+                            IndicatorView="indicatorView2">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid RowDefinitions="*,*" ColumnDefinitions="100, *"
+                                          ColumnSpacing="10" Padding="0" BackgroundColor="Transparent">
+                                        <Image Source="{Binding images, Converter={StaticResource FirstValueOfArrayConverter}}"
+                                               Grid.RowSpan="2" Grid.Row="0" VerticalOptions="Start"
+                                               Aspect="AspectFill" />
+                                        <VerticalStackLayout Spacing="10"
+                                            Grid.Column="1" Grid.Row="0">
+                                            <Label FontSize="13" FontAttributes="Bold"
+                                                TextColor="Black">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0}, {1}, {2}">
+                                                        <Binding Path="streetName" />
+                                                        <Binding Path="city" />
+                                                        <Binding Path="postcode" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                            <Label FontSize="13" Text="{Binding price, StringFormat='£{0:N0} pcm'}"
+                                                   VerticalOptions="Start" VerticalTextAlignment="Start"
+                                                    TextColor="Black"/>
+
+                                        </VerticalStackLayout>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnSavedGridTapped"
+                                                NumberOfTapsRequired="1" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <IndicatorView x:Name="indicatorView2"
+                            Grid.Row="1" VerticalOptions="End" Margin="0,0,0,0"
+                            IndicatorColor="LightGray" SelectedIndicatorColor="#474747"
+                            HorizontalOptions="Center" />
+                    </Grid>
+                </Frame>
+            </VerticalStackLayout>
+            <Button Grid.Row="4" VerticalOptions="Center" Margin="20,0,20,0" Clicked="LogOutBtn_Clicked"
                     BackgroundColor="{StaticResource Secondary}" Text="Log out"/>
         </Grid>
     </ScrollView>
