@@ -17,12 +17,6 @@ public class MainViewModel : BindableObject
 
     public MainViewModel(Listing temp)
     {
-        //ImageList = new List<string>
-        //    {
-        //        "house_example.jpeg",
-        //        "bathroom.jpeg",
-        //        "living_room.jpeg"
-        //    };
         toRent = temp;
         ImageList = globalref.appDB.ImageStringToArray(toRent);
 
@@ -75,7 +69,6 @@ public class MainViewModel : BindableObject
             res = globalref.appDB.UpdateSaved(s);
             
         }
-        globalref.LoadSavedListingsCollection();
         MessagingCenter.Send<MainViewModel, string>(this, "CollectionChanged", "CollectionUpdated");
         return res;
 
@@ -138,8 +131,9 @@ public partial class RentPage : ContentPage
         fullText = currentImg + "/" + totalImgs;
 
         initLabels();
+        globalref.RecentListingsCollection.Add(toRent);
 
-        if(images.saved)
+        if (images.saved)
         {
             savedBtn.Text = fullSaved;
             savedBtn.FontSize = 18;

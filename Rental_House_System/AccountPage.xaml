@@ -83,8 +83,8 @@
                 <Label Text="Recently viewed listings" FontSize="17" FontAttributes="Bold"/>
                 <Frame BorderColor="Gray" CornerRadius="5" Padding="5" HasShadow="True">
                     <Grid RowDefinitions="*, 20" HeightRequest="100">
-                        <CarouselView Grid.Row="0" x:Name="recentListings"  EmptyView="No listings saved"
-                            IndicatorView="indicatorView2">
+                        <CarouselView Grid.Row="0" x:Name="recentListings"  EmptyView="No recent listings"
+                            ItemsSource="{Binding RecentListingsCollection}" IndicatorView="indicatorView2">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid RowDefinitions="*,*" ColumnDefinitions="100, *"

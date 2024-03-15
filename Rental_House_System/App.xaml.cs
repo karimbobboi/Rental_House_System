@@ -12,6 +12,7 @@ public partial class App : Application
 		InitializeComponent();
 		activeUser = new User();
         MainPage = new LoginPage();
+        RecentListingsCollection = new ObservableCollection<Listing>();
         //MainPage = new SearchPage();
     }
 
@@ -29,28 +30,17 @@ public partial class App : Application
         }
     }
 
-    private ObservableCollection<Listing> savedListingsCollection;
-    public ObservableCollection<Listing> SavedListingsCollection
+    private ObservableCollection<Listing> recentListingsCollection;
+    public ObservableCollection<Listing> RecentListingsCollection
     {
-        get { return savedListingsCollection; }
+        get { return recentListingsCollection; }
         set
         {
             if (value != null)
             {
-                savedListingsCollection = value;
-                OnPropertyChanged("SavedListingsCollection");
+                recentListingsCollection = value;
+                OnPropertyChanged("RecentListingsCollection");
             }
         }
-    }
-
-    public void LoadSavedListingsCollection() {
-        ObservableCollection<Listing> AllListings = appDB.GetAllListings();
-        ObservableCollection<Saved> savedListings = appDB.GetAllSavedByUserID(activeUser.uid);
-        
-        var idsToFilter = savedListings.Select(saved => saved.listingId).ToArray();
-        var listingsWithMatchingIds = AllListings.Where(listing => idsToFilter.Contains(listing.lId)).ToList();
-
-        SavedListingsCollection = new ObservableCollection<Listing>(listingsWithMatchingIds);
-        System.Diagnostics.Debug.WriteLine("qwertyu " + SavedListingsCollection.Count);
     }
 }

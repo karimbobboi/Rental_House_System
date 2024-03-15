@@ -9,11 +9,9 @@ public partial class AccountPage : ContentPage
     public AccountPage()
 	{
 		InitializeComponent();
-        //profile.BindingContext = globalref.activeUser;
         editUserVM = new EditUserVM();
         BindingContext = editUserVM;
-        //savedListings.ItemsSource = editUserVM.SavedListingsCollection;//editUserVM.allListings;
-        recentListings.ItemsSource = editUserVM.AllListings;
+        recentListings.BindingContext = globalref;
     }
 
     async void OnGridTapped(object sender, EventArgs args)
