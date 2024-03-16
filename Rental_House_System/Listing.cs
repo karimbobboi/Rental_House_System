@@ -46,18 +46,6 @@ namespace Rental_House_System
         }
     }
 
-    //public class Address
-    //{
-    //    public string postcode { get; set; }
-    //    public string city { get; set; }
-    //    public string streetName { get; set; }
-
-    //    public override string ToString()
-    //    {
-    //        return $"{streetName}, {city}, {postcode}";
-    //    }
-    //}
-
     [Table("Agent")]
     public class Agent
     {

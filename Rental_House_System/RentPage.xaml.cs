@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Graphics.Text;
 using static Java.Util.Jar.Attributes;
 using static System.Net.Mime.MediaTypeNames;
 using System.Reflection;
 using System.ComponentModel;
+using System;
 
 namespace Rental_House_System;
 
@@ -124,14 +124,27 @@ public partial class RentPage : ContentPage
         
         images = new MainViewModel(temp);
         BindingContext = images;
-        rrr.BindingContext = toRent;
+        listDetails.BindingContext = toRent;
 
         currentImg = "1";
         totalImgs = images.ImageList.Length.ToString();
         fullText = currentImg + "/" + totalImgs;
 
         initLabels();
-        globalref.RecentListingsCollection.Add(toRent);
+        bool isInRecent = globalref.RecentListingsCollection.Any(item => item.Equals(toRent));
+
+        if (isInRecent)
+        {
+            globalref.RecentListingsCollection.Remove(toRent);
+            globalref.RecentListingsCollection.Add(toRent);
+        }
+        else
+        {
+            if (globalref.RecentListingsCollection.Count > 5) {
+                globalref.RecentListingsCollection.RemoveAt(0);
+            }
+            globalref.RecentListingsCollection.Add(toRent);
+        }
 
         if (images.saved)
         {
@@ -145,42 +158,72 @@ public partial class RentPage : ContentPage
 
     void ShowBtn_Clicked(System.Object sender, System.EventArgs e)
     {
-        for (int i = 6; i < props.Count; i++) {
-            var child = props.Children[i];
-
-            if (child is Label label)
-            {
-                label.IsVisible = true;
-            } else if (child is Microsoft.Maui.Controls.Button bt)
-            {
-                bt.IsVisible = true;
-            }
-        }
-        showBtn.IsVisible = false;
-    }
-
-    void HideBtn_Clicked(System.Object sender, System.EventArgs e)
-    {
-        for (int i = 6; i < props.Count; i++)
+        
+        if (sender is Button button && props.Children.Contains(button))
         {
-            var child = props.Children[i];
+            props.Children.Remove(button);
 
-            if (child is Label label)
+            // Check if the button is currently in the first position
+            if (Grid.GetRow(button) == 1)
             {
-                label.IsVisible = false;
+                for (int i = 0; i < props.Count; i++)
+                {
+                    var child = props.Children[i];
+                    try
+                    {
+                        if (child is Label label)
+                        {
+                            label.IsVisible = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.Write($"Something went wrong at {i}.");
+                        break;
+                    }
+                }
+
+                button.Text = "Hide >";
+                Grid.SetRow(button, props.RowDefinitions.Count - 1);
+                Grid.SetColumn(button, props.RowDefinitions.Count % 3);
             }
-            else if (child is Microsoft.Maui.Controls.Button bt)
+            else
             {
-                bt.IsVisible = false;
+                for (int i = 0; i < props.Count; i++)
+                {
+                    var child = props.Children[i];
+                    try
+                    {
+                        if (child is Label label)
+                        {
+                            if (Grid.GetRow(label) == 1 && Grid.GetColumn(label) == 2) {
+                                label.IsVisible = false;
+                            }
+                            else if (Grid.GetRow(label) < 2) { continue; }
+                            label.IsVisible = false;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.Write($"Something went wrong at {i}.");
+                        break;
+                    }
+                }
+
+                button.Text = "Show more >";
+                Grid.SetRow(button, 1);
+                Grid.SetColumn(button, 2);
             }
+
+            // Add the button back to the grid at its new position
+            props.Children.Add(button);
         }
-        showBtn.IsVisible = true;
     }
 
     private bool initLabels()
     {
-
-        List<string> features = new List<string>();
+        // store all property details into a list
+    List<string> features = new List<string>();
         if (toRent.bills)
             features.Add("Bills included");
         if (toRent.internet)
@@ -203,13 +246,20 @@ public partial class RentPage : ContentPage
             features.Add("Washing machine");
         if (toRent.dishwasher)
             features.Add("Dish washer");
+        //if (toRent.fridge)
+            features.Add("Fridge");
 
         int index = 0; bool vis = true;
-        
-        for (int i = 0; i < features.Count; i++) {
+        int maxLoop = features.Count == 10 ? 4 : 3 % features.Count;
+
+        // loop through features list and add all details to the Grid
+        // three per row
+
+        for (int i = 0; i < maxLoop; i++) {
             for (int j = 0; j < 3; j++) {
                 try
                 {
+                    if (i == 3 && j > 0) { break; }
                     if (features.Count > 6 && (i == 1 && j == 2))
                     {
                         vis = false;
@@ -223,30 +273,14 @@ public partial class RentPage : ContentPage
                 }
                 catch (Exception e)
                 {
-                    System.Diagnostics.Trace.Write("Something went wrong.");
+                    System.Diagnostics.Trace.Write($"Something went wrong at {i}, {j}.");
                     break;
                 }
             }
         }
 
-        if (features.Count > 6)
-        {
-
-            Microsoft.Maui.Controls.Button hdBtn = new Microsoft.Maui.Controls.Button
-            {
-                BackgroundColor = Colors.Transparent,
-                FontAttributes = FontAttributes.Bold,
-                Padding = new Thickness(0),
-                HorizontalOptions = LayoutOptions.Start,
-                Text = "Hide >",
-                TextColor = Colors.Black,
-                FontSize = 13,
-                IsVisible = false
-            };
-            hdBtn.Clicked += HideBtn_Clicked;
-            int mod = features.Count % 3;
-            props.Add(hdBtn, mod, (features.Count / 3));
-        } else
+        // if features too many add show and hide functionality
+        if (features.Count <= 6)
         {
             showBtn.IsVisible = false;
         }
