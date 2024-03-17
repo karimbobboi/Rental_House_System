@@ -5,7 +5,7 @@
              x:Class="Rental_House_System.RentPage">
     <ContentPage.Resources>
         <local:IntToStringConverter x:Key="intToString" />
-        <local:StringToArrayConverter x:Key="StringToArrayConverter" />
+        <local:AgentEmailToNameConverter x:Key="AgentEmailToName" />
     </ContentPage.Resources>
 
     <ScrollView>
@@ -25,7 +25,7 @@
                         IndicatorColor="LightGray" SelectedIndicatorColor="#474747"
                         HorizontalOptions="Center" />
                 </Grid>
-                <StackLayout Grid.Row="1" Orientation="Vertical"
+                <StackLayout Grid.Row="1" Orientation="Vertical" 
                              Margin="20,0,20,0" Spacing="10" >
                     <VerticalStackLayout x:Name="listDetails" HorizontalOptions="Start" Margin="0,0,0,0">
                         <Grid ColumnDefinitions="*,40,110" ColumnSpacing="0">
@@ -58,12 +58,15 @@
                             <Label Grid.Column="2" Text="{Binding numToilets, StringFormat='{0} toilets',
                                 Converter={StaticResource intToString}}" FontSize="13"/>
                         </HorizontalStackLayout>
+                        <Label Text="{Binding agentEmail, StringFormat='Listed by {0}',
+                                Converter={StaticResource AgentEmailToName}}"
+                               Margin="0,10,0,0" FontSize="13"/>
                     </VerticalStackLayout>
                 </StackLayout>
 
                 <!--View for property details-->
-                <StackLayout Margin="20,10,20,0" Grid.Row="2">
-                    <BoxView HeightRequest="0.2" Margin="0,20,0,10"/>
+                <StackLayout Margin="20,0,20,0" Grid.Row="2">
+                    <BoxView HeightRequest="0.2" Margin="0,0,0,10"/>
                     <Label Text="Property details" FontSize="18" FontAttributes="Bold"/>
 
                     <!--Grid holds all properties. All added/removed using c#-->

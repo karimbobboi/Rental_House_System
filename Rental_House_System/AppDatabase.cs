@@ -43,7 +43,6 @@ namespace Rental_House_System
         {
             // Insert into the table and return the status of the inset
             var insertstatus = DatabaseConnection.Insert(user);
-            System.Diagnostics.Debug.WriteLine(insertstatus);
             return insertstatus;
         }
         // Delete a user

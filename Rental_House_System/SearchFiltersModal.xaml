@@ -47,17 +47,7 @@
             <Switch Grid.Row="9" Grid.Column="1" IsToggled="{Binding shortTerm}"
                     VerticalOptions="Start"/>
 
-            <!--public bool bills { get; set; } = false;
-        public bool internet { get; set; } = false;
-        public bool tv { get; set; } = false;
-        public bool gym { get; set; } = false;
-        public bool lterm { get; set; } = false;
-        public bool kitchen { get; set; } = false;
-        public bool dishwasher { get; set; } = false;
-        public bool wmachine { get; set; } = false;
-        public bool park { get; set; } = false;-->
-
         </Grid>
-        <Button Margin="0,30,0,0" Text="Done" Clicked="ClickedButton_Clicked" BackgroundColor="{StaticResource Tertiary}"/>
+        <Button Margin="0,30,0,0" Text="Done" Clicked="DoneButton_Clicked" BackgroundColor="{StaticResource Tertiary}"/>
     </VerticalStackLayout>
 </ContentPage>

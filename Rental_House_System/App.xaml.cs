@@ -11,9 +11,9 @@ public partial class App : Application
 	{
 		InitializeComponent();
 		activeUser = new User();
-        MainPage = new LoginPage();
+        //MainPage = new LoginPage();
         RecentListingsCollection = new ObservableCollection<Listing>();
-        //MainPage = new SearchPage();
+        MainPage = new AddListing();
     }
 
     public void LogOut()

@@ -24,7 +24,6 @@ public class EditUserVM : INotifyPropertyChanged
         MessagingCenter.Subscribe<MainViewModel, string>(this, "CollectionChanged", (sender, arg) =>
         {
             SavedListingsCollection = GetSavedListingsCollection();
-            System.Diagnostics.Debug.WriteLine("rdectfvgybhuij " + SavedListingsCollection.Count);
         });
     }
 
@@ -179,13 +178,8 @@ public partial class EditUser : ContentPage
     public EditUser(EditUserVM temp)
 	{
 		InitializeComponent();
-        //firstNameGrid.BindingContext = globalref.activeUser;
-
-        //editUserVM = new EditUserVM();
         editUserVM = temp; 
         BindingContext = editUserVM;
-        //fields.BindingContext = globalref.activeUser;
-
     }
 
     async void CancelBtn_Clicked(System.Object sender, System.EventArgs e)

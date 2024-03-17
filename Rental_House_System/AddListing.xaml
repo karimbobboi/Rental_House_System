@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rental_House_System.AddListing"
+             Title="AddListing">
+
+    <!--Apartment</x:String>
+                        <x:String>Detached</x:String>
+                        <x:String>Semi-Detached</x:String>
+                        <x:String>Terraced</x:String>
+                        <x:String>Flat</x:String>
+                        <x:String>Bungalow-->
+    <VerticalStackLayout>
+        <VerticalStackLayout x:Name="main" BackgroundColor="AliceBlue" VerticalOptions="FillAndExpand">
+<!--FIRST PAGE-->
+            <VerticalStackLayout x:Name="firstPage" BackgroundColor="Transparent" HeightRequest="800">
+    <!--Collect property type-->
+                <Grid x:Name="props" VerticalOptions="CenterAndExpand" HeightRequest="250" BackgroundColor="Transparent" Margin="20,40,20,0"
+                      RowDefinitions="60,50,50,50" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="20">
+                    <Label Grid.Row="0" Text="What best describes your property?" FontAttributes="Bold"
+                           FontSize="20" Grid.ColumnSpan="2"/>
+
+                    <Frame Grid.Row="1" Grid.Column="0" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Apartment" Clicked="PropertySelect_Clicked"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="1" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Terraced" Clicked="PropertySelect_Clicked"/>
+                    </Frame>
+
+                    <Frame Grid.Row="2" Grid.Column="0" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Detached" Clicked="PropertySelect_Clicked"/>
+                    </Frame>
+                    <Frame Grid.Row="2" Grid.Column="1" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Semi-Detached" Clicked="PropertySelect_Clicked"/>
+                    </Frame>
+
+                    <Frame Grid.Row="3" Grid.Column="0" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Flat" Clicked="PropertySelect_Clicked"/>
+                    </Frame>
+                    <Frame Grid.Row="3" Grid.Column="1" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Bungalow" Clicked="PropertySelect_Clicked"/>
+                    </Frame>
+                </Grid>
+
+    <!--Collect property features-->
+                <Grid x:Name="features" VerticalOptions="CenterAndExpand" HeightRequest="450" BackgroundColor="Transparent" Margin="20,30,20,0"
+                      RowDefinitions="60,50,50,50,50,50,60" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="20">
+                    <Label Grid.Row="0" Text="What does your property have to offer?" FontAttributes="Bold"
+                           FontSize="20" Grid.ColumnSpan="2"/>
+
+                    <Frame Grid.Row="1" Grid.Column="0" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black"
+                                Text="Bills included" Clicked="FeatureSelect_Clicked"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="1" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" 
+                                Text="Internet included" Clicked="FeatureSelect_Clicked"/>
+                    </Frame>
+
+                    <Frame Grid.Row="2" Grid.Column="0" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="TV"
+                                Clicked="FeatureSelect_Clicked"/>
+                    </Frame>
+                    <Frame Grid.Row="2" Grid.Column="1" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black"
+                                Text="Gym membership" Clicked="FeatureSelect_Clicked"/>
+                    </Frame>
+
+                    <Frame Grid.Row="3" Grid.Column="0" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Kitchen"
+                                Clicked="FeatureSelect_Clicked"/>
+                    </Frame>
+                    <Frame Grid.Row="3" Grid.Column="1" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Fridge" Clicked="FeatureSelect_Clicked"/>
+                    </Frame>
+
+                    <Frame Grid.Row="4" Grid.Column="0" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Dish washer"
+                                Clicked="FeatureSelect_Clicked"/>
+                    </Frame>
+                    <Frame Grid.Row="4" Grid.Column="1" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Washing machine" Clicked="FeatureSelect_Clicked"/>
+                    </Frame>
+
+                    <Frame Grid.Row="5" Grid.Column="0" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Long term"
+                                Clicked="FeatureSelect_Clicked"/>
+                    </Frame>
+                    <Frame Grid.Row="5" Grid.Column="1" BorderColor="{StaticResource Gray200}"
+                           CornerRadius="5" Padding="0" HasShadow="False">
+                        <Button BackgroundColor="Transparent" TextColor="Black" Text="Parking" Clicked="FeatureSelect_Clicked"/>
+                    </Frame>
+
+                    <Button Grid.Row="6" Grid.Column="1" VerticalOptions="Center" Margin="0,10,0,0"
+                            BackgroundColor="{StaticResource Tertiary}" Text="Next" Clicked="FirstToSecond"/>
+                </Grid>
+            </VerticalStackLayout>
+
+<!--SECOND PAGE-->
+            <Grid x:Name="secondPage" VerticalOptions="CenterAndExpand" HeightRequest="250" BackgroundColor="Transparent" Margin="20,40,20,0"
+                      RowDefinitions="60,50,50,50,50,50,50" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="20">
+
+                <Label Grid.Row="0" Text="More details" FontAttributes="Bold"
+                           FontSize="20" Grid.ColumnSpan="2"/>
+
+                <!--Availablity-->
+                <Label Grid.Row="1" Grid.Column="0" Text="Available from" FontAttributes="Bold" 
+                         VerticalOptions="Center"  Margin="0,0,0,10" FontSize="16" />
+                <DatePicker Margin="0,0,20,0" VerticalOptions="Start" 
+                    MaximumDate="2034-12-31" FontSize="16" HorizontalOptions="Center"
+                    Date="{Binding date}" Grid.Row="1" FontAttributes="Bold"
+                    Grid.Column="1" x:Name="datePicker"
+                    BackgroundColor="Transparent"/>
+
+                <!--Furnishing-->
+                <Label Grid.Row="2" Grid.Column="0" Text="Furnishing" FontAttributes="Bold" 
+                         VerticalOptions="Center"  Margin="0,0,0,10" FontSize="16" />
+                <Picker Grid.Row="2" Grid.Column="1" x:Name="furnishing" SelectedIndex="{Binding furnishing}" 
+                    VerticalOptions="Start" VerticalTextAlignment="Start" FontSize="16">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Furnished</x:String>
+                            <x:String>Part furnished</x:String>
+                            <x:String>Unfurnished</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                 <!--Bedrooms-->
+                <Label Grid.Row="3" Grid.Column="0" Text="Bedrooms" FontAttributes="Bold"
+                           FontSize="16" Grid.ColumnSpan="2"/>
+                <Grid Grid.Row="3" Grid.Column="1" BackgroundColor="Transparent" VerticalOptions="Start"
+                      HeightRequest="20" ColumnDefinitions="30,50,20">
+                    <Button Grid.Column="0" WidthRequest="50" HeightRequest="50" BackgroundColor="Transparent" TextColor="Black" BorderColor="{StaticResource Gray300}"
+                            CornerRadius="25" Text="–" Padding="0" Margin="0" HorizontalOptions="Start"  Clicked="BedButton_Clicked"/>
+                    <Label Grid.Column="1" Text="{Binding rooms}" FontAttributes="Bold"
+                           FontSize="16" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
+                    <Button Grid.Column="2" WidthRequest="50" HeightRequest="50" BackgroundColor="Transparent" TextColor="Black" BorderColor="{StaticResource Gray300}"
+                            CornerRadius="25" Text="+"  Padding="0" Margin="0" HorizontalOptions="Start" Clicked="BedButton_Clicked"/>
+                </Grid>
+
+                <!--Bathrooms-->
+                <Label Grid.Row="4" Grid.Column="0" Text="Bathrooms" FontAttributes="Bold"
+                           FontSize="16" Grid.ColumnSpan="2"/>
+                <Grid Grid.Row="4" Grid.Column="1" BackgroundColor="Transparent" VerticalOptions="Start"
+                      HeightRequest="20" ColumnDefinitions="30,50,20">
+                    <Button Grid.Column="0" WidthRequest="50" HeightRequest="50" BackgroundColor="Transparent" TextColor="Black" BorderColor="{StaticResource Gray300}"
+                            CornerRadius="25" Text="–" Padding="0" Margin="0" HorizontalOptions="Start" Clicked="BathButton_Clicked"/>
+                    <Label Grid.Column="1" Text="{Binding bath}" FontAttributes="Bold"
+                           FontSize="16" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
+                    <Button Grid.Column="2" WidthRequest="50" HeightRequest="50" BackgroundColor="Transparent" TextColor="Black" BorderColor="{StaticResource Gray300}"
+                            CornerRadius="25" Text="+"  Padding="0" Margin="0" HorizontalOptions="Start" Clicked="BathButton_Clicked"/>
+                </Grid>
+
+                <!--Price-->
+                <Label Grid.Row="5" Grid.Column="0" Text="Price" FontAttributes="Bold"
+                           FontSize="16" Grid.ColumnSpan="2" VerticalOptions="Center"/>
+                <Frame BorderColor="Black" BackgroundColor="White" HeightRequest="40"
+                       VerticalOptions="Start" CornerRadius="5" Padding="0" Grid.Row="5" Grid.Column="1">
+
+                            <!--<Entry VerticalOptions="Center" BackgroundColor="Transparent" Margin="20,0,0,0" Placeholder="Enter street name" />-->
+                    <Grid VerticalOptions="Start" Margin="10,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="£" VerticalOptions="Center" HorizontalOptions="Start" FontSize="16" FontAttributes="Bold"/>
+                        <Entry Grid.Column="1" VerticalOptions="Start" VerticalTextAlignment="Start" FontSize="16" MaxLength="7" 
+                               BackgroundColor="Transparent" Keyboard="Numeric" Margin="5,1,0,0" Text="{Binding price}"
+                               Placeholder="Enter amount"/>
+                    </Grid>
+                </Frame>
+
+                <Button Grid.Row="6" Grid.Column="0" VerticalOptions="Center" Margin="0,10,0,0"
+                            BackgroundColor="{StaticResource Primary}" Text="Back" Clicked="SecondToFirst"/>
+                <Button Grid.Row="6" Grid.Column="1" VerticalOptions="Center" Margin="0,10,0,0"
+                            BackgroundColor="{StaticResource Tertiary}" Text="Next" Clicked="SecondToThird"/>
+            </Grid>
+
+<!--THIRD PAGE-->
+            <Grid x:Name="thirdPage" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Margin="20,40,20,0"
+                      RowDefinitions="30,250,250, *" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="20">
+        <!--Address-->
+                <Label Grid.Row="0" Text="Address" FontAttributes="Bold"
+                           FontSize="20" Grid.ColumnSpan="2"/>
+                <Grid Grid.Row="1" RowDefinitions="80,80,80" ColumnDefinitions="*" Grid.ColumnSpan="2">
+                    <VerticalStackLayout Grid.Row="0" BackgroundColor="Transparent" Spacing="5">
+                        <Label Text="Street name"/>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                            <Entry BackgroundColor="Transparent" Margin="10,0,0,0" x:Name="Street"
+                                   Placeholder="Enter street name" Text="{Binding streetName}"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Row="1" Spacing="5">
+                        <Label Text="City"/>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                            <Entry BackgroundColor="Transparent" MaxLength="14" x:Name="City"
+                                   Margin="10,0,0,0" Placeholder="Enter city" Text="{Binding city}"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Row="2" Spacing="5">
+                        <Label Text="Postcode"/>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                            <Entry BackgroundColor="Transparent" MaxLength="10" x:Name="Postcode"
+                                   Margin="10,0,0,0" Placeholder="Enter postcode" Text="{Binding postcode}"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Grid>
+
+        <!--Agent details-->
+                <Grid Grid.Row="2" RowDefinitions="30,80,80,80" ColumnDefinitions="*" Grid.ColumnSpan="2">
+                    <Label Grid.Row="0" Text="Agent details" FontAttributes="Bold"
+                           FontSize="20" Grid.ColumnSpan="2"/>
+                    <VerticalStackLayout Grid.Row="1" BackgroundColor="Transparent" Spacing="5">
+                        <Label Text="Name"/>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                            <Entry BackgroundColor="Transparent" Margin="10,0,0,0"
+                                   Text="{Binding agentName}" Placeholder="Enter name" x:Name="AgentName" />
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Row="2" Spacing="5">
+                        <Label Text="Email"/>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                            <Entry BackgroundColor="Transparent" Keyboard="Email" Text="{Binding agentEmail}"
+                                   Margin="10,0,0,0" Placeholder="Enter email" MaxLength="20" x:Name="AgentEmail"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Row="3" Spacing="5">
+                        <Label Text="Phone number"/>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                            <Entry BackgroundColor="Transparent" Keyboard="Numeric" Text="{Binding agentPhone}"
+                                   Margin="10,0,0,0" Placeholder="+44" MaxLength="16" x:Name="AgentPhone"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Grid>
+                <Button Grid.Row="3" Grid.Column="0" VerticalOptions="Center" Margin="0,10,0,0"
+                            BackgroundColor="{StaticResource Primary}" Text="Back" Clicked="ThirdToSecond"/>
+                <Button Grid.Row="3" Grid.Column="1" VerticalOptions="Center" Margin="0,10,0,0"
+                            BackgroundColor="{StaticResource Tertiary}" Text="Next" Clicked="ThirdToFourth"/>
+
+            </Grid>
+<!--FOURTH PAGE-->
+            <Grid x:Name="fourthPage" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Margin="20,40,20,0"
+                      RowDefinitions="30,320,*" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="20">
+                <Label Grid.Row="0" Text="Add Images" FontAttributes="Bold"
+                      FontSize="20" Grid.ColumnSpan="2"/>
+                <Grid Grid.Row="1" Grid.ColumnSpan="2" RowDefinitions="*,20,50" Margin="0,20,0,0">
+                    <Frame Grid.Row="0" BorderColor="Black" CornerRadius="5" Padding="0">
+                        <CarouselView ItemsSource="{Binding AddedImages}"
+                                      IndicatorView="indicatorView" EmptyView="No added image">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid RowDefinitions="*">
+                                        <Image Grid.Row="0" Source="{Binding .}" Aspect="AspectFill" />
+                                        <Label Grid.Row="0" HorizontalOptions="End" Margin="0,10,10,0"
+                                               HorizontalTextAlignment="End" Text="X" FontAttributes="Bold">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="LabelTapped" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                     </Frame>
+                    <IndicatorView x:Name="indicatorView" Grid.Row="1"
+                        VerticalOptions="End" Margin="0,0,0,0"
+                        IndicatorColor="LightGray" SelectedIndicatorColor="#474747"
+                        HorizontalOptions="Center" />
+                    <Button Margin="0,10,0,0" VerticalOptions="End" Grid.Row="2"
+                            BackgroundColor="{StaticResource Tertiary}" Text="Add image" Clicked="AddImageClicked"/>
+                </Grid>
+                
+
+                <Button Grid.Row="2" Grid.Column="0" VerticalOptions="Center" Margin="0,10,0,0"
+                            BackgroundColor="{StaticResource Primary}" Text="Back" Clicked="FourthToThird"/>
+                <Button Grid.Row="2" Grid.Column="1" VerticalOptions="Center" Margin="0,10,0,0"
+                            BackgroundColor="{StaticResource Tertiary}" Text="Publish" Clicked="PublishListingBtn"/>
+
+            </Grid>
+            </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

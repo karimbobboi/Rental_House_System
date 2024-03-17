@@ -22,12 +22,10 @@ public class MainViewModel : BindableObject
 
         if (globalref.appDB.GetSavedByIds(globalref.activeUser.uid, toRent.lId) == null)
         {
-            System.Diagnostics.Debug.WriteLine("wertyui");
             saved = false;
         }
         else
         {
-            System.Diagnostics.Debug.WriteLine("wertyu12212122i");
             saved = true;
         }
 
@@ -71,8 +69,6 @@ public class MainViewModel : BindableObject
         }
         MessagingCenter.Send<MainViewModel, string>(this, "CollectionChanged", "CollectionUpdated");
         return res;
-
-        // Call the uodate function in Model
     }
 
     public int RemoveSaved()
@@ -85,8 +81,6 @@ public class MainViewModel : BindableObject
         }
         MessagingCenter.Send<MainViewModel, string>(this, "CollectionChanged", "CollectionUpdated");
         return res;
-
-        // Call the uodate function in Model
     }
 }
 
@@ -120,8 +114,6 @@ public partial class RentPage : ContentPage
 	{
         InitializeComponent();
         toRent = temp;
-        //ImageList = globalref.appDB.ImageStringToArray(toRent);
-        
         images = new MainViewModel(temp);
         BindingContext = images;
         listDetails.BindingContext = toRent;

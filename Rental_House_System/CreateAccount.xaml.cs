@@ -25,7 +25,10 @@ public partial class CreateAccount : ContentPage
 				u.email = electronicMail.Text;
 				u.password = pass.Text;
 
-				globalref.appDB.AddUser(u);
+                globalref.appDB.AddUser(u);
+                User j = globalref.appDB.GetUserByEmail(u.email);
+                System.Diagnostics.Debug.WriteLine($" test: {j.uid}");
+
                 await DisplayAlert("Account successfully created",
                     $"Welcome {firstName.Text}", "Continue");
                 globalref.MainPage = new LoginPage();

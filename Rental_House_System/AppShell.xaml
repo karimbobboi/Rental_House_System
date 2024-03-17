@@ -19,11 +19,6 @@
                 ContentTemplate="{DataTemplate local:SearchPage}"
                 Route="SearchPage" />
         </Tab>
-        <Tab Title="Login">
-            <ShellContent
-                ContentTemplate="{DataTemplate local:LoginPage}"
-                Route="LoginPage" />
-        </Tab>
         <Tab Title="Account">
             <ShellContent
                 Title="Account"

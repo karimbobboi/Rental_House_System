@@ -365,9 +365,9 @@ public class SearchVM : INotifyPropertyChanged
         searchTerm = "";
         propType = 0;
         furnishing = 0;
-        minPrice = 0;
-        minBath = 0;
-        minBed = 0;
+        minPrice = 0; maxPrice = 10000;
+        minBath = 0; maxBath = 10;
+        minBed = 0; maxBed = 10;
 
         kitchen = false; wMachine = false;
         gym = false; parking = false;
@@ -385,19 +385,15 @@ public partial class SearchPage : ContentPage
 	{
 		InitializeComponent();
         searchVM = new SearchVM();
-        searchVM.maxPrice = 100; // set the initial value for max price
+        searchVM.maxPrice = 10000; // set the initial value for max price
         BindingContext = searchVM;
         furnishing.SelectedIndex = 0;
         radiusPicker.SelectedIndex = 0;
-        //propertyPicker.SelectedIndex = 0;
     }
 
     async void SearchButton_Clicked(System.Object sender, System.EventArgs e)
     {
-        App globalref = (App)Application.Current;
-        if (searchBar.Text != "") 
-                await Navigation.PushAsync(new SearchResults(searchVM.SearchListings()));
-        //await Navigation.PushAsync(new SearchResults(globalref.appDB.GetAllListings()));
+        await Navigation.PushAsync(new SearchResults(searchVM.SearchListings()));
     }
 
     async void FiltersButton_Clicked(System.Object sender, System.EventArgs e)
