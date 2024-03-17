@@ -9,7 +9,6 @@ public partial class SearchResults : ContentPage
     public SearchResults(ObservableCollection<Listing> temp)
 	{
 		InitializeComponent();
-        //allListings = globalref.appDB.GetAllListings();
         allListings = temp;
         results.ItemsSource = allListings;
         if(allListings.Count > 0)
@@ -42,7 +41,6 @@ public partial class SearchResults : ContentPage
         // Get the index of the item in the ItemsSource collection
         int index = allListings.IndexOf(item);
         Listing listing = allListings[index];
-        //System.Diagnostics.Debug.WriteLine($"HERE: {listing.images}");
         await Navigation.PushAsync(new RentPage(listing));
     }
 }

@@ -4,36 +4,58 @@
              x:Class="Rental_House_System.CreateAccount"
              Title="Create Account">
     <ScrollView>
-        <Grid Margin="20,0,20,20" RowSpacing="10" ColumnSpacing="10" VerticalOptions="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="60"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <VerticalStackLayout Margin="20,0,20,20" Spacing="30">
+            <Label Text="Create Account" FontSize="24" FontAttributes="Bold" Margin="0,120,0,0"/>
+            <Grid RowSpacing="10" ColumnSpacing="10" VerticalOptions="Start" ColumnDefinitions="*,*">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
 
-            <VerticalStackLayout Grid.Row="0" Grid.Column="0">
-                <Label Text="First Name" FontSize="16" FontAttributes="Bold"/>
-                <Entry x:Name="firstName" Text=""/>
-            </VerticalStackLayout>
-            <VerticalStackLayout Grid.Row="0" Grid.Column="1">
-                <Label Text="Last Name" FontSize="16" FontAttributes="Bold"/>
-                <Entry x:Name="lastName" Text=""/>
-            </VerticalStackLayout>
-            <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2">
-                <Label Text="Email" FontSize="16" FontAttributes="Bold"/>
-                <Entry x:Name="electronicMail" Text="" Keyboard="Email"/>
-            </VerticalStackLayout>
-            <VerticalStackLayout Grid.Row="2" Grid.ColumnSpan="2">
-                <Label Text="Password" FontSize="16" FontAttributes="Bold"/>
-                <Entry x:Name="pass" Text="" IsPassword="True"/>
-            </VerticalStackLayout>
-            <Button Grid.Row="3" Grid.ColumnSpan="2" Text="Create account" VerticalOptions="Center"
-                    BackgroundColor="{StaticResource Secondary}" Margin="0,10,0,0" Clicked="CreateBtn_Clicked"/>
-        </Grid>
+                <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                    <Label Text="First Name" FontSize="16" FontAttributes="Bold"/>
+                    <Frame BorderColor="Black" BackgroundColor="White" HeightRequest="40"
+                           VerticalOptions="Start" CornerRadius="5" Padding="0" Grid.Row="5" Grid.Column="1">
+                        <Entry x:Name="firstName" Text="" Margin="10,0,0,0" BackgroundColor="Transparent"
+                                Placeholder="Enter first name" VerticalOptions="Center" VerticalTextAlignment="Start"
+                                Keyboard="Email"/>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="0" Grid.Column="1">
+                    <Label Text="Last Name" FontSize="16" FontAttributes="Bold"/>
+                    <Frame BorderColor="Black" BackgroundColor="White" HeightRequest="40"
+                           VerticalOptions="Start" CornerRadius="5" Padding="0" Grid.Row="5" Grid.Column="1">
+                        <Entry x:Name="lastName" Text="" Margin="10,0,0,0" BackgroundColor="Transparent"
+                                Placeholder="Enter last name" VerticalOptions="Center" VerticalTextAlignment="Start"
+                                Keyboard="Email"/>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2">
+                    <Label Text="Email" FontSize="16" FontAttributes="Bold"/>
+                    <Frame BorderColor="Black" BackgroundColor="White" HeightRequest="40"
+                           VerticalOptions="Start" CornerRadius="5" Padding="0" Grid.Row="5" Grid.Column="1">
+                        <Entry x:Name="electronicMail" Text="" Margin="10,0,0,0" BackgroundColor="Transparent"
+                                Placeholder="Enter email" VerticalOptions="Center" VerticalTextAlignment="Start"
+                                Keyboard="Email"/>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="2" Grid.ColumnSpan="2">
+                    <Label Text="Password" FontSize="16" FontAttributes="Bold"/>
+                    <Frame BorderColor="Black" BackgroundColor="White" HeightRequest="40"
+                           VerticalOptions="Start" CornerRadius="5" Padding="0" Grid.Row="5" Grid.Column="1">
+                        <Entry x:Name="pass" Text="" Margin="10,0,0,0" BackgroundColor="Transparent"
+                                Placeholder="Enter password" VerticalOptions="Center" VerticalTextAlignment="Start"
+                                IsPassword="True"/>
+                    </Frame>
+                </VerticalStackLayout>
+                    <Button Grid.Row="3" Grid.ColumnSpan="2" Text="Create account" VerticalOptions="Center"
+                        BackgroundColor="{StaticResource Secondary}" Margin="0,10,0,0" Clicked="CreateBtn_Clicked"/>
+                    <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Back to login" VerticalOptions="Center"
+                        BackgroundColor="{StaticResource Primary}" Margin="0,0,0,0" Clicked="BackBtn_Clicked"/>
+            </Grid>
+         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -59,7 +59,7 @@
                 </Picker.ItemsSource>
             </Picker>
             <Label Text="Furnished" Grid.Row="3" Grid.Column="0" FontAttributes="Bold" Margin="0,10,0,0"/>
-            <Picker Grid.Row="3" Grid.Column="1" x:Name="furnishing" SelectedIndex="{Binding furnishing}" 
+            <Picker Grid.Row="3" Grid.Column="1" x:Name="furnishing" SelectedIndex="{Binding furnishing}"
                     VerticalOptions="Start" VerticalTextAlignment="Start">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">

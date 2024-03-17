@@ -3,14 +3,18 @@
 public partial class CreateAccount : ContentPage
 {
     bool email_valid = false, password_valid = false;
+    App globalref = (App)Application.Current;
     public CreateAccount()
 	{
 		InitializeComponent();
 	}
 
+    void BackBtn_Clicked(System.Object sender, System.EventArgs e) {
+        globalref.MainPage = new LoginPage();
+    }
+
     async void CreateBtn_Clicked(System.Object sender, System.EventArgs e)
     {
-		App globalref = (App)Application.Current;
 		if (!(firstName.Text == "" || lastName.Text == "" ||
             electronicMail.Text == "" || pass.Text == "")) {
 

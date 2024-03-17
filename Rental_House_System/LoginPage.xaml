@@ -15,11 +15,20 @@
 
             <VerticalStackLayout Grid.Row="1">
                 <Label Text="Email" FontSize="18" FontAttributes="Bold"/>
-                <Entry x:Name="electronicMail" Text=""/>
+                <Frame BorderColor="Black" BackgroundColor="White" HeightRequest="40"
+                       VerticalOptions="Start" CornerRadius="5" Padding="0" Grid.Row="5" Grid.Column="1">
+                    <Entry x:Name="electronicMail" Text="" Margin="10,0,0,0" BackgroundColor="Transparent"
+                            Placeholder="Enter email" VerticalOptions="Center" VerticalTextAlignment="Start"/>
+                </Frame>
             </VerticalStackLayout>
             <VerticalStackLayout Grid.Row="2">
                 <Label Text="Password" FontSize="18" FontAttributes="Bold"/>
-                <Entry x:Name="pass" Text=""/>
+                <Frame BorderColor="Black" BackgroundColor="White" HeightRequest="40"
+                       VerticalOptions="Start" CornerRadius="5" Padding="0" Grid.Row="5" Grid.Column="1">
+                    <Entry x:Name="pass" Text="" Margin="10,0,0,0" BackgroundColor="Transparent"
+                            Placeholder="Enter password" VerticalOptions="Center" IsPassword="True"
+                            VerticalTextAlignment="Start"/>
+                </Frame>
             </VerticalStackLayout>
             <Button Grid.Row="3" Text="Sign in" VerticalOptions="Center" Clicked="SignInBtn_Clicked"
                     BackgroundColor="{StaticResource Primary}" Margin="0,10,0,0"/>
