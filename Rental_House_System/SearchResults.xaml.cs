@@ -42,6 +42,7 @@ public partial class SearchResults : ContentPage
         // Get the index of the item in the ItemsSource collection
         int index = allListings.IndexOf(item);
         Listing listing = allListings[index];
+        //System.Diagnostics.Debug.WriteLine($"HERE: {listing.images}");
         await Navigation.PushAsync(new RentPage(listing));
     }
 }

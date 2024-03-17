@@ -14,6 +14,7 @@ namespace Rental_House_System
         
         public string CurrentState; // to hold the current db state
         static SQLiteConnection DatabaseConnection; // to hold and establish the connection
+        App globalref = (App)Application.Current;
 
         public AppDatabase()
 		{
@@ -85,7 +86,6 @@ namespace Rental_House_System
         {
             // Insert into the table and return the status of the inset
             var insertstatus = DatabaseConnection.Insert(agent);
-            System.Diagnostics.Debug.WriteLine(insertstatus);
             return insertstatus;
         }
         // Delete a user
@@ -158,12 +158,12 @@ namespace Rental_House_System
 
         public string ArrayToImageString(string[] imgs)
         {
-            string joinedString = string.Join(",", imgs);
+            string joinedString = string.Join("^", imgs);
             return joinedString;
         }
 
         public string[] ImageStringToArray(Listing listing) {
-            string[] stringArray = listing.images.Split(',');
+            string[] stringArray = listing.images.Split("^");
             return stringArray;
         }
 

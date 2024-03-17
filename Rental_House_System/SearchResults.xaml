@@ -23,12 +23,12 @@
                         <Frame CornerRadius="10" Padding="0,0,0,10" Margin="10,10" BackgroundColor="White">
                             <StackLayout Padding="0">
                                 <Grid RowDefinitions="*,Auto">
-                                    <CarouselView EmptyView="No image" IndicatorView="indicatorView"
+                                    <CarouselView EmptyView="No image" IndicatorView="indicatorView" HeightRequest="250"
                                                   ItemsSource="{Binding images, Converter={StaticResource StringToArrayConverter}}">
                                         <CarouselView.ItemTemplate>
                                             <DataTemplate>
                                                 <StackLayout Padding="0">
-                                                    <Image Source="{Binding .}" Aspect="AspectFill" />
+                                                    <Image Source="{Binding .}" Aspect="AspectFill"/>
                                                     <StackLayout.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="OnInnerStackTapped"
                                                             NumberOfTapsRequired="1" />

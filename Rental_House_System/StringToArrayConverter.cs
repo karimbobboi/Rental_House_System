@@ -5,6 +5,7 @@ namespace Rental_House_System
 {
     public class StringToArrayConverter : IValueConverter
     {
+        App globalref = (App)Application.Current;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             // Check if the value is null or not a string
@@ -12,7 +13,7 @@ namespace Rental_House_System
                 return null;
 
             // Split the string by commas and remove any leading or trailing whitespace
-            string[] values = ((string)value).Split(',').Select(s => s.Trim()).ToArray();
+            string[] values = ((string)value).Split(globalref.imageArrayDivider).Select(s => s.Trim()).ToArray();
 
             return values;
         }

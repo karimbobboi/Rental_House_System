@@ -176,8 +176,21 @@ public partial class RentPage : ContentPage
                 }
 
                 button.Text = "Hide >";
-                Grid.SetRow(button, props.RowDefinitions.Count - 1);
-                Grid.SetColumn(button, props.RowDefinitions.Count % 3);
+
+                // set the position of hide button to the last in grid
+                // start by getting last label then retrieving its row and col
+                Label lastLabel = (Label)props.Children[props.Children.Count - 1];
+                int row = Grid.GetRow(lastLabel);
+                int col = Grid.GetColumn(lastLabel);
+
+                if (col == 2) {
+                    Grid.SetRow(button, row + 1);
+                    Grid.SetColumn(button, 0);
+                }
+                else {
+                    Grid.SetRow(button, row);
+                    Grid.SetColumn(button, col + 1);
+                }
             }
             else
             {

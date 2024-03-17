@@ -7,6 +7,7 @@ public partial class App : Application
 {
     public User activeUser;
     public AppDatabase appDB = new AppDatabase();
+    public readonly string imageArrayDivider = "^"; // used in database to split image string array
     public App()
 	{
 		InitializeComponent();

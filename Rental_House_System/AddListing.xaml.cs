@@ -276,11 +276,35 @@ public class AddListingVM : INotifyPropertyChanged
         }
     }
 
+    public void ResetVM() {
+        AddedImages = new ObservableCollection<string>();
+        FeaturesDictionary = new Dictionary<string, bool>();
+
+        FeaturesDictionary["Bills included"] = false;
+        FeaturesDictionary["Internet included"] = false;
+        FeaturesDictionary["TV"] = false;
+        FeaturesDictionary["Gym membership"] = false;
+        FeaturesDictionary["Kitchen"] = false;
+        FeaturesDictionary["Fridge"] = false;
+        FeaturesDictionary["Dish washer"] = false;
+        FeaturesDictionary["Washing machine"] = false;
+        FeaturesDictionary["Long term"] = false;
+        FeaturesDictionary["Parking"] = false;
+
+        date = DateTime.Today;
+        agentEmail = ""; agentName = "";
+        agentPhone = ""; type = "";
+        furnishing = "Furnished"; bath = 1;
+        rooms = 1; price = 1;
+        streetName = ""; city = "";
+        postcode = "";
+    }
 }
 
 public partial class AddListing : ContentPage
 {
     AddListingVM addListingVM;
+    App globalref = (App)Application.Current;
     public AddListing()
 	{
 		InitializeComponent();
@@ -466,11 +490,96 @@ public partial class AddListing : ContentPage
             addListingVM.bath = button.Text == "+" ? addListingVM.bath : addListingVM.bath - 1;
     }
 
+    void BackToLogin(System.Object sender, System.EventArgs e)
+    {
+        globalref.MainPage = new LoginPage();
+    }
+
    async void PublishListingBtn(System.Object sender, System.EventArgs e)
     {
         if(addListingVM.AddedImages.Count == 0) {
             await DisplayAlert("Please add at least 1 image", "", "OK");
             return;
         }
+
+        Agent ag = globalref.appDB.GetAgentByEmail(addListingVM.agentEmail);
+        if (ag == null)
+        {
+            ag = new Agent();
+            ag.name = addListingVM.agentName;
+            ag.email = addListingVM.agentEmail;
+            ag.phone = addListingVM.agentPhone;
+
+            globalref.appDB.AddAgent(ag);
+        }
+
+        string imgsString = globalref.appDB.ArrayToImageString(addListingVM.AddedImages.ToArray());
+
+        Listing newListing = new Listing()
+        {
+            price = (int)addListingVM.price,
+            agentEmail = ag.email,
+            images = imgsString,
+            streetName = addListingVM.streetName,
+            postcode = addListingVM.postcode,
+            city = addListingVM.city,
+            type = addListingVM.type,
+            available = addListingVM.date.ToString("dd/MM/yyyy"),
+            numRooms = addListingVM.rooms,
+            numToilets = addListingVM.bath,
+            bills = addListingVM.FeaturesDictionary["Bills included"],
+            internet = addListingVM.FeaturesDictionary["Internet included"],
+            tv = addListingVM.FeaturesDictionary["TV"],
+            gym = addListingVM.FeaturesDictionary["Gym membership"],
+            lterm = addListingVM.FeaturesDictionary["Long term"],
+            kitchen = addListingVM.FeaturesDictionary["Kitchen"],
+            dishwasher = addListingVM.FeaturesDictionary["Dish washer"],
+            wmachine = addListingVM.FeaturesDictionary["Washing machine"],
+            park = addListingVM.FeaturesDictionary["Parking"],
+            fridge = addListingVM.FeaturesDictionary["Fridge"]
+        };
+        System.Diagnostics.Debug.WriteLine("qw7");
+        globalref.appDB.AddListing(newListing);
+        System.Diagnostics.Debug.WriteLine("qw8");
+        bool answer = await DisplayAlert("Listing published successfully!!", "Do you want to publish another one?", "Yes", "No");
+        if (answer)
+        {
+         // Reset entire page   
+            secondPage.IsVisible = false;
+            thirdPage.IsVisible = false;
+            fourthPage.IsVisible = false;
+            firstPage.IsVisible = true;
+            furnishing.SelectedIndex = 0;
+            addListingVM.ResetVM();
+            double deviceHeight = Application.Current.MainPage.Height;
+            firstPage.HeightRequest = deviceHeight;
+
+            // reset the features and property details buttons
+            foreach (var fr in props.Children.OfType<Frame>())
+            {
+                fr.HasShadow = false;
+                fr.BorderColor = Color.FromHex("#C8C8C8");
+                var frameButton = fr.Content as Button;
+                if (frameButton != null)
+                {
+                    frameButton.FontAttributes = FontAttributes.None;
+                }
+            }
+
+            foreach (var fr in features.Children.OfType<Frame>())
+            {
+                fr.HasShadow = false;
+                fr.BorderColor = Color.FromHex("#C8C8C8");
+                var frameButton = fr.Content as Button;
+                if (frameButton != null)
+                {
+                    frameButton.FontAttributes = FontAttributes.None;
+                }
+            }
+        } else
+        {
+            globalref.MainPage = new LoginPage();
+        }
+
     }
 }
